@@ -1,0 +1,566 @@
+---
+title: "Figure 3. Taxonomical and functional characteristics of differential bacteria between the indica and japonica root microbiota."
+author: "Yong-Xin Liu"
+date: "2019/2/20"
+output: html_document
+---
+
+```{r init, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Clean workspace
+rm(list=ls()) 
+# Load setting and functions
+source("../script/stat_plot_functions.R")
+# Set output directory
+output_dir="./"
+```
+
+## a-b. Manhattan plot
+
+(a–b) Manhattan plot showing OTUs enriched in indica or japonica in field I (a) and field II (b). Each dot or triangle represents a single OTU. OTUs enriched in indica or japonica are represented by filled or empty triangles, respectively (FDR adjusted P < 0.05, Wilcoxon rank sum test). OTUs are arranged in taxonomic order and colored according to the phylum and class of Proteobacteria.
+
+- [Script for differentially abundance OTUs](script/compare.R)
+
+### a. Plotting manhattan plot for field I
+
+```{r manhattan, echo=TRUE}
+library("Biobase")
+library("edgeR")
+library("ggplot2")
+library("gplots")
+library("grid")
+library("RColorBrewer")
+library("reshape2")
+library("VennDiagram")
+library("dplyr")
+library("pheatmap")
+
+# India vs Japonica in field I
+x = read.table("../data/LIND-LTEJ_all.txt", header=T, row.names= 1, sep="\t", stringsAsFactors = F) 
+x = x[,1:14]
+x = na.omit(x)
+
+# Negtive log Pvalue for manhattan
+x$neglogp = -log10(x$PValue)
+
+x$otu=rownames(x)
+x = arrange(x, Kindom, Phylum, Class, Order, Family, Genus, Species)
+x$otu = factor(x$otu, levels=x$otu)   # set x order
+x$num = 1:dim(x)[1]
+
+# Color by taxonomy
+per= read.delim("../data/sum_pc.txt", sep = "\t", row.names=1, header=T)
+mean = rowMeans(per)
+per = as.data.frame(mean[order(mean, decreasing = T)])
+top_tax=head(rownames(per), n=13)
+
+# group non-top into Low Abundance
+x$tax = x$Phylum 
+# Proteobacteria classified into class
+x[x$tax %in% "Proteobacteria",]$tax =  x[x$tax %in% "Proteobacteria",]$Class # no level can get value
+if (length(unique(x$tax)) > length(top_tax)){
+	x[!(x$tax %in% top_tax),]$tax = "Low Abundance"
+}
+
+# Adjust label order
+label = unique(x$tax)
+label = label[!(label %in% "Low Abundance")] # Delete low abundance
+x$tax = factor(x$tax, levels = c(label, "Low Abundance"))
+# Claculate labe median
+temp = x[x$tax %in% label, c("tax","num")]
+mat_mean = aggregate(temp[,-1], by=temp[1], FUN=median) # mean
+
+# Set max neglogp
+if (max(x$neglogp)>20){
+  x[x$neglogp>20,]$neglogp  = 20
+}
+
+# Manhattan plot
+FDR = min(x$neglogp[x$level!="NotSig"])
+p = ggplot(x, aes(x=num, y=neglogp, color=tax, size=logCPM, shape=level)) +
+  geom_point(alpha=.7) + 
+  geom_hline(yintercept=FDR, linetype=2, color="lightgrey") +
+  scale_shape_manual(values=c(25, 17, 20))+
+  scale_size(breaks=c(5, 10, 15)) +
+  labs(x="OTU", y="-log10(P)", title=paste("result/compare/LTEJ-LIND_all.txt", sep=" ")) +main_theme +
+  theme(legend.position="top") +
+  scale_x_continuous(breaks=mat_mean$x, labels=mat_mean$tax) + 
+  theme(axis.text.x=element_text(angle=45, hjust=1, vjust=1))
+ggsave(file=paste("manhattan_LTEJ-LIND.pdf", sep=""), p, width = 10, height = 4, useDingbats=F)
+p
+```
+
+
+### b. Plotting manhattan plot for field II
+
+```{r manhattan_2, echo=TRUE}
+# India vs Japonica in field II
+x = read.table("../data/HIND-HTEJ_all.txt", header=T, row.names= 1, sep="\t", stringsAsFactors = F) 
+x = x[,1:14]
+x = na.omit(x)
+
+# Negtive log Pvalue for manhattan
+x$neglogp = -log10(x$PValue)
+
+x$otu=rownames(x)
+x = arrange(x, Kindom, Phylum, Class, Order, Family, Genus, Species)
+x$otu = factor(x$otu, levels=x$otu)   # set x order
+x$num = 1:dim(x)[1]
+
+# Color by taxonomy
+per= read.delim("../data/sum_pc.txt", sep = "\t", row.names=1, header=T)
+mean = rowMeans(per)
+per = as.data.frame(mean[order(mean, decreasing = T)])
+top_tax=head(rownames(per), n=13)
+
+# group non-top into Low Abundance
+x$tax = x$Phylum 
+
+# Proteobacteria classified into class
+x[x$tax %in% "Proteobacteria",]$tax =  x[x$tax %in% "Proteobacteria",]$Class # no level can get value
+
+if (length(unique(x$tax)) > length(top_tax)){
+	x[!(x$tax %in% top_tax),]$tax = "Low Abundance" # no level can get value
+}
+
+# Adjust label order
+label = unique(x$tax)
+label = label[!(label %in% "Low Abundance")] # Delete low abundance
+x$tax = factor(x$tax, levels = c(label, "Low Abundance"))
+# Claculate labe median
+temp = x[x$tax %in% label, c("tax","num")]
+mat_mean = aggregate(temp[,-1], by=temp[1], FUN=median) # mean
+
+
+# Set max neglogp
+if (max(x$neglogp)>20){
+  x[x$neglogp>20,]$neglogp  = 20
+}
+
+# Manhattan plot
+FDR = min(x$neglogp[x$level!="NotSig"])
+p = ggplot(x, aes(x=num, y=neglogp, color=tax, size=logCPM, shape=level)) +
+  geom_point(alpha=.7) + 
+  geom_hline(yintercept=FDR, linetype=2, color="lightgrey") +
+  scale_shape_manual(values=c(25, 17, 20))+
+  scale_size(breaks=c(5, 10, 15)) +
+  labs(x="OTU", y="-log10(P)", title=paste("result/compare/HIND-HTEJ_all.txt", sep=" ")) +main_theme +
+  theme(legend.position="top") +
+  scale_x_continuous(breaks=mat_mean$x, labels=mat_mean$tax) + 
+  theme(axis.text.x=element_text(angle=45, hjust=1, vjust=1))
+ggsave(file=paste("manhattan_HIND-HTEJ.pdf", sep=""), p, width = 10, height = 4, useDingbats=F)
+p
+```
+
+## c-d. Overlapped OTUs in filed I and filed II
+
+(c–d) Overlapping OTUs enriched in indica (c) or japonica (d) in both fields.
+
+### c. overlapped OTUs of indica enriched
+
+```{r venn, echo=TRUE}
+library(VennDiagram)
+num =2
+data <- read.table(file="../data/diff.list", sep="\t", quote="")
+HTEJ_HIND_D <- data[grepl("\\<HTEJ_HIND_D\\>",data[,2]),1]
+LTEJ_LIND_D <- data[grepl("\\<LTEJ_LIND_D\\>",data[,2]),1]
+color_v <- c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3")[1:num]
+p <- venn.diagram( 
+	x = list(HTEJ_HIND_D=HTEJ_HIND_D, LTEJ_LIND_D=LTEJ_LIND_D),
+	filename = NULL, col = "transparent", 
+	fill = color_v,
+	alpha = 0.50,
+	label.col = c("black"),
+	cex = 1, fontfamily = "Helvetica",
+	cat.default.pos="outer",
+	cat.pos=0, margin=0.1,  
+	cat.col = color_v,cat.cex = 1, cat.fontfamily = "Helvetica"
+)
+grid.draw(p)
+```
+
+### c. overlapped OTUs of japonica enriched
+
+```{r venn2, echo=TRUE}
+HTEJ_HIND_E <- data[grepl("\\<HTEJ_HIND_E\\>",data[,2]),1]
+LTEJ_LIND_E <- data[grepl("\\<LTEJ_LIND_E\\>",data[,2]),1]
+color_v <- c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3")[1:num]
+p <- venn.diagram( 
+	x = list(HTEJ_HIND_E=HTEJ_HIND_E, LTEJ_LIND_E=LTEJ_LIND_E),
+	filename = NULL, col = "transparent", 
+	fill = color_v,
+	alpha = 0.50,
+	label.col = c("black"),
+	cex = 1, fontfamily = "Helvetica",
+	cat.default.pos="outer",
+	cat.pos=0, margin=0.1,  
+	cat.col = color_v,cat.cex = 1, cat.fontfamily = "Helvetica"
+)
+grid.draw(p)
+```
+
+Output common OTU in venn diagram
+
+```{bash venn_number}
+pwd
+cat ../data/?IND-?TEJ_all.txt | grep 'Enriched' | cut -f 1 | sort | uniq -d > ../data/otu_IND_common_specific.txt
+cat ../data/?IND-?TEJ_all.txt | grep 'Depleted' | cut -f 1 | sort | uniq -d > ../data/otu_TEJ_common_specific.txt
+```
+
+
+## f/h. Differentially abundance OTUs in time-course
+
+e-g figure will draw after f-h, because the OTUs order determined by hierarchy cluster of time-course data.
+
+(f, h) Pattern of relative abundance of the corresponding OTUs enriched in indica (f) or japonica (h) according to time-course data from the rice root microbiota in the field in Changping Farm. Columns represent the days of rice growth in the field. 
+
+Time-course data is from our previous published paper.
+
+Cited: Zhang, J.Y., Zhang, N., Liu, Y.X., Zhang, X.N., Hu, B., Qin, Y., Xu, H.R., Wang, H., Guo, X.X., Qian, J.M., Wang, W., Zhang, P.F., Jin, T., Chu, C.C., and Bai, Y. (2018). Root microbiota shift in rice correlates with resident time in the field and developmental stage. Science China-Life Sciences 61, 613-621.
+
+Github: https://github.com/microbiota/Zhang2018SCLS
+
+### f. Indica specific OTUs in time-course
+
+```{r ind_time}
+design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
+design$group = design$groupID
+otutab = read.table(paste("../data/otutab.txt", sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+
+# Select by manual set group，use Nippobare(A50)
+if (TRUE){
+  sub_design = subset(design, group %in% c("A50Cp1","A50Cp2","A50Cp3","A50Cp7","A50Cp10","A50Cp14","A50Cp21","A50Cp28","A50Cp35","A50Cp42","A50Cp49","A50Cp63","A50Cp70","A50Cp77","A50Cp84","A50Cp91","A50Cp98","A50Cp112","A50Cp119"))
+  #  Set group order
+  sub_design$group  = factor(sub_design$group, levels=c("A50Cp1","A50Cp2","A50Cp3","A50Cp7","A50Cp10","A50Cp14","A50Cp21","A50Cp28","A50Cp35","A50Cp42","A50Cp49","A50Cp63","A50Cp70","A50Cp77","A50Cp84","A50Cp91","A50Cp98","A50Cp112","A50Cp119"))
+}
+idx = rownames(sub_design) %in% colnames(otutab)
+sub_design = sub_design[idx,]
+sub_otutab = otutab[,rownames(sub_design)]
+# head(sub_otutab)[,1:10]
+
+# Normalize to read per million (RPM)
+sub_norm =t(sub_otutab)/colSums(sub_otutab,na=T)*1000000
+# head(sub_norm)[,1:10]
+grp = sub_design[, "group", drop=F]
+mat_t2 = merge(grp, sub_norm, by="row.names")
+mat_t2 = mat_t2[,-1]
+mat_mean = aggregate(mat_t2[,-1], by=mat_t2[1], FUN=mean) # mean
+mat_mean_final = do.call(rbind, mat_mean)[-1,]
+geno = mat_mean$group
+colnames(mat_mean_final) = geno
+dim(mat_mean_final)
+mat_mean_final = as.data.frame(mat_mean_final)
+
+#  filter OTUs in time-course
+filtered = read.table("../data/otu_IND_common_specific.txt", header=F, sep="\t", comment.char="")
+otutab.sub.mean = as.data.frame(mat_mean_final[as.vector(filtered$V1),])
+no.abundance.in.timecourse = otutab.sub.mean[apply(otutab.sub.mean,1,max) < 0.0001, ]
+otutab.sub.mean = otutab.sub.mean[apply(otutab.sub.mean,1,max) > 0.0001, ]
+time = as.numeric(gsub("A50Cp", "", colnames(otutab.sub.mean)))
+otu.time.cor = as.data.frame(cor(t(otutab.sub.mean), time))
+otu.time.cor = otu.time.cor[order(otu.time.cor, decreasing = T),, drop=F]
+
+tax = read.table("../data/taxonomy_8.txt", header=T, row.names =1, sep="\t", comment.char="")
+anno_row = data.frame(Phylum = tax[rownames(otu.time.cor),]$Phylum, row.names = rownames(otu.time.cor))
+
+# save plot for figure
+pheatmap(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),], scale = "row", cluster_rows =T, 	annotation_row = anno_row,
+          cluster_cols = F, fontsize=6, cellwidth = 7, cellheight = 1,width=5, height=8,
+         filename = paste("otu_IND_common_specific_time.pdf",sep=""),
+         border_color = F, labels_col = gsub("A50Cp", "", colnames(mat_mean_final)), show_rownames = F)
+
+pheatmap(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),], scale = "row", cluster_rows =T, 	annotation_row = anno_row,
+          cluster_cols = F, fontsize=6, cellwidth = 7, cellheight = 1,
+         border_color = F, labels_col = gsub("A50Cp", "", colnames(mat_mean_final)), show_rownames = F)
+
+# save figure data
+write.table(round(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),]/100,3), file = "otu_IND_common_specific_time.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+system("sed -i '1 s/^/OTUID\t/;s/A50Cp//g' otu_IND_common_specific_time.txt")
+
+# save plot for supplement figure and label order
+p = pheatmap(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),], scale = "row", cluster_rows =T, 	annotation_row = anno_row,
+         file = "otu_IND_common_specific_timeS.pdf",
+        cellwidth = 7, cellheight = 4,  cluster_cols = F, fontsize=5, labels_col = gsub("A50Cp", "", colnames(mat_mean_final)))
+# pheatmap object p, row lable in tree_row$lables, and order in tree_row$order
+OTUID_new = p$tree_row$labels[p$tree_row$order]
+# save OTU label new order after cluster 
+write.table(OTUID_new, file = "otu_IND_common_specific_time_clust.txt", sep = "\n", quote = F, row.names = F, col.names = F)
+```
+
+## h. Japonica specific OTUs in time-course
+
+```{r jap_time}
+filtered = read.table("../data/otu_TEJ_common_specific.txt", header=F, sep="\t", comment.char="")
+otutab.sub.mean = as.data.frame(mat_mean_final[as.vector(filtered$V1),])
+no.abundance.in.timecourse = otutab.sub.mean[apply(otutab.sub.mean,1,max) < 0.0001, ]
+otutab.sub.mean = otutab.sub.mean[apply(otutab.sub.mean,1,max) > 0.0001, ]
+time = as.numeric(gsub("A50Cp", "", colnames(otutab.sub.mean)))
+otu.time.cor = as.data.frame(cor(t(otutab.sub.mean), time))
+otu.time.cor = otu.time.cor[order(otu.time.cor, decreasing = T),, drop=F]
+
+tax = read.table("../data/taxonomy_8.txt", header=T, row.names =1, sep="\t", comment.char="")
+anno_row = data.frame(Phylum = tax[rownames(otu.time.cor),]$Phylum, row.names = rownames(otu.time.cor))
+
+
+# save plot for figure
+pheatmap(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),], scale = "row", cluster_rows =T, 	annotation_row = anno_row,
+          cluster_cols = F, fontsize=6, cellwidth = 7, cellheight = 1,width=5, height=8,
+         filename = paste("otu_TEJ_common_specific_time.pdf",sep=""),
+         border_color = F, labels_col = gsub("A50Cp", "", colnames(mat_mean_final)), show_rownames = F)
+
+pheatmap(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),], scale = "row", cluster_rows =T, 	annotation_row = anno_row,
+          cluster_cols = F, fontsize=6, cellwidth = 7, cellheight = 1,
+         border_color = F, labels_col = gsub("A50Cp", "", colnames(mat_mean_final)), show_rownames = F)
+
+# save figure data
+write.table(round(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),]/100,3), file = "otu_TEJ_common_specific_time.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+system("sed -i '1 s/^/OTUID\t/;s/A50Cp//g' otu_TEJ_common_specific_time.txt")
+
+# save plot for supplement figure and label order
+p = pheatmap(mat_mean_final[rownames(mat_mean_final[rownames(otu.time.cor),]),], scale = "row", cluster_rows =T, 	annotation_row = anno_row,
+         file = "otu_TEJ_common_specific_timeS.pdf",
+        cellwidth = 7, cellheight = 4,  cluster_cols = F, fontsize=5, labels_col = gsub("A50Cp", "", colnames(mat_mean_final)))
+# pheatmap object p, row lable in tree_row$lables, and order in tree_row$order
+OTUID_new = p$tree_row$labels[p$tree_row$order]
+# save OTU label new order after cluster 
+write.table(OTUID_new, file = "otu_TEJ_common_specific_time_clust.txt", sep = "\n", quote = F, row.names = F, col.names = F)
+```
+
+
+## e/g. OTUs annotate by FAPROTAX
+
+(e, g) Metabolic and ecological functions of OTUs enriched in indica (upper panel, e) and japonica (lower panel, g) in two fields based on FAPROTAX database. Each row represents an OTU. The presence of functions is shown in red.
+
+### e. Indica enriched OTUs annotate by FAPROTAX
+
+```{r indica_faprotax_heatmap}
+high_cor = read.table("otu_IND_common_specific_time_clust.txt", header=F,  sep="\t", comment.char="", stringsAsFactors = F)
+rownames(high_cor) = high_cor$V1
+faprotax = read.table("../data/faprotax_report.mat", header=T, row.names=1, sep="\t", comment.char="")
+
+x = merge(high_cor, faprotax, by="row.names", all.x=T)
+x[is.na(x)] = 0 
+
+faprotax.sub =x
+rownames(faprotax.sub) = faprotax.sub$Row.names
+faprotax.sub = faprotax.sub[,-(1:2)]
+faprotax.sub = faprotax.sub[high_cor$V1, ]
+faprotax.sub = faprotax.sub[, colSums(faprotax.sub)>0]
+faprotax_list_all = colnames(faprotax.sub)
+
+# Manually select topic relation pathway
+func_list = read.table("faprotax.id", header=F,  sep="\t", comment.char="", stringsAsFactors = F)
+func_list$V1 %in% colnames(faprotax.sub)
+faprotax.sub = faprotax.sub[,func_list$V1]
+
+# Rename label: replace underline to space, uppercase firest alphabeta, and short some long name
+faprotax_std = colnames(faprotax.sub)
+faprotax_list = c("Xylanolysis","Cellulolysis","Sulfur respiration","Sulfur oxidation","Hydrogen oxidation","Nitrate ammonification","Nitrite ammonification","Nitrate respiration","Nitrite respiration","Nitrogen respiration","Manganese respiration","Iron respiration","Arsenate respiration","Fumarate respiration","Hydrocarbon degradation","Aromatic degradation","Fermentation")
+colnames(faprotax.sub) = faprotax_list
+
+pheatmap(faprotax.sub, cluster_rows = F, # filename = "../fig1/3compare/otu_IND_common_specific_time_faprotax3-30_2.pdf",
+         cellwidth = 7, cellheight = 1,# annotation_row = anno_row,
+         cluster_cols = F, fontsize=6, boder_color = F, show_rownames = F)
+
+# Save figure related table
+write.table(faprotax.sub, file = "otu_IND_common_faprotax.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+
+# Add IND/TEJ vs Soil: Enriched/Depleted or NoSig
+INDSoil = read.table("../data/IND-Soil_all.txt", header=T, row.names =1, sep="\t", comment.char="")
+TEJSoil = read.table("../data/TEJ-Soil_all.txt", header=T, row.names =1, sep="\t", comment.char="")
+anno_row = data.frame(IND = INDSoil[rownames(faprotax.sub),]$level, TEJ = TEJSoil[rownames(faprotax.sub),]$level, row.names = rownames(faprotax.sub))
+
+pheatmap(faprotax.sub, cluster_rows = F, filename = "otu_IND_common_specific_time_faprotax.pdf",
+         cellwidth = 7, cellheight = 1,annotation_row = anno_row,
+         cluster_cols = F, fontsize=6, boder_color = F, show_rownames = F)
+
+pheatmap(faprotax.sub, cluster_rows = F,
+         cellwidth = 7, cellheight = 1,annotation_row = anno_row,
+         cluster_cols = F, fontsize=6, boder_color = F, show_rownames = F)
+```
+
+### Indica specific OTUs enriched in nitrogen cycle
+
+Permutation test is Indica specific OTUs significantlly enrichment in nitrogen-related pathway
+
+```{r permutation_test_faprotax, eval=FALSE, include=TRUE}
+# Calculate 141 common OTU abundance, and frequence contatin 'nitr'
+sample_OTU = read.table("../data/otu_IND_common_specific.txt", header=F, sep="\t", comment.char="")
+
+faprotax = read.table("../data/faprotax_report.mat", header=T, row.names=1, sep="\t", comment.char="")
+y=faprotax_std[grep('nitr', faprotax_std)]
+count_anno = function(OTU_list){
+x=OTU_list
+rownames(x) = x$V1
+m = merge(x, faprotax, by="row.names", all.x=T)
+m[is.na(m)] = 0 
+rownames(m) = m$Row.names
+m = m[,y]
+N = sum(rowSums(m))
+N
+}
+# 56 of 141 OTUs related to nitrogen metabolism
+IND_count_anno = count_anno(sample_OTU)
+
+# 1000 permutation test
+OTU_all = read.table("../data/HIND-HTEJ_all.txt", header=T, row.names=NULL, sep="\t", comment.char="")
+
+set.seed(1)
+sample_OTU = as.data.frame(sample(OTU_all[,1],141))
+colnames(sample_OTU)[1]="V1"
+count_anno(sample_OTU)
+
+n <- 1000
+null <- vector("numeric",n)
+
+# Ref: https://github.com/genomicsclass/labs/inference/random_variables.Rmd
+for (i in 1:n) {
+  set.seed(i)
+  sample_OTU = as.data.frame(sample(OTU_all[,1],141))
+  colnames(sample_OTU)[1]="V1"
+  count_anno(sample_OTU)
+  null[i] <- count_anno(sample_OTU)
+}
+histogram(null, freq=T)
+
+pvalue = length(null[null>=IND_count_anno])/length(null)
+pvalue
+
+# ggplot plotting
+df = as.data.frame(null)
+colnames(df)="number"
+
+p = ggplot(df, aes(x=number))+
+  geom_line(stat="density", colour = "green")+
+  geom_vline(xintercept=IND_count_anno, linetype=2)+
+  annotate("text",x=IND_count_anno,y=0.03, label=paste("P = ", pvalue, sep="")) +
+  theme_bw()
+p
+ggsave(paste("nitr_enriched_permutation.pdf", sep=""), p, 
+         width = 5, height = 3)
+
+# 10 times, p = 0.1; 100 times, p = 0.02; 1000 times, p = 0.02.
+```
+
+### Integrate FAPROTAX annotation and relative abundance
+
+```{r faprotax_sum}
+# Total faprotax annotated 62.972%
+# Sum heatmap to abundance
+mean_abu = read.table(paste("../data/otu_mean_tax.txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+faprotax_indica = read.table(paste("otu_IND_common_faprotax.txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+mean_abu = mean_abu[rownames(faprotax_indica),c("Mean"), drop=F]
+colSums(mean_abu)
+# Indica annotated total abundance is 27.297%
+
+mean_abu2 = faprotax_indica * t(mean_abu)
+mean_abu2_sum = colSums(mean_abu2)
+write.table(mean_abu2_sum, file = "otu_IND_common_faprotax_RA.txt", quote = F, row.names = T, col.names = T, sep = "\t")
+```
+
+## g. Japonica specific OTUs in FAPROTAX
+
+```{r japonica_faprotax_heatmap}
+high_cor = read.table("otu_TEJ_common_specific_time_clust.txt", header=F,  sep="\t", comment.char="", stringsAsFactors = F)
+rownames(high_cor) = high_cor$V1
+faprotax = read.table("../data/faprotax_report.mat", header=T, row.names=1, sep="\t", comment.char="")
+
+x = merge(high_cor, faprotax, by="row.names", all.x=T) 
+x[is.na(x)] = 0 
+faprotax.sub =x
+rownames(faprotax.sub) = faprotax.sub$Row.names
+faprotax.sub = faprotax.sub[,-(1:2)]
+faprotax.sub = faprotax.sub[high_cor$V1, func_list$V1]
+
+# Rename label: replace underline to space, uppercase firest alphabeta, and short some long name
+colnames(faprotax.sub)
+colnames(faprotax.sub) = c("Xylanolysis","Cellulolysis","Sulfur respiration","Sulfur oxidation","Hydrogen oxidation","Nitrate ammonification","Nitrite ammonification","Nitrate respiration","Nitrite respiration","Nitrogen respiration","Manganese respiration","Iron respiration","Arsenate respiration","Fumarate respiration","Hydrocarbon degradation","Aromatic degradation","Fermentation")
+
+pheatmap(faprotax.sub, cluster_rows = F, filename = "otu_TEJ_common_specific_time_faprotax.pdf",
+         cellwidth = 7, cellheight = 1, 
+         cluster_cols = F, fontsize=6, boder_color = F, show_rownames = F)
+
+pheatmap(faprotax.sub, cluster_rows = F, cellwidth = 7, cellheight = 1,
+         cluster_cols = F, fontsize=6, boder_color = F, show_rownames = F)
+# Save figure related table
+write.table(faprotax.sub, file = "otu_TEJ_common_faprotax.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+```
+
+## I/J. Different function of indica or japonica
+
+(i–j) Cumulative relative abundance of metabolic and ecological functions enriched in the root microbiota of indica (i) or japonica (j) varieties in two fields. The horizontal bars within boxes represent medians. The tops and bottoms of boxes represent 75th and 25th quartiles, respectively. The upper and lower whiskers extend 1.5 × the interquartile range from the upper edge and lower edge of the box, respectively. The number of biological replicates in this figure is as follows: in field I, indica (n = 201), japonica (n = 80); in field II, indica (n = 201), japonica (n = 81).
+
+[Script for Barplot](script/alpha_boxplot_far.R)
+
+### i. indica enriched FAPROTAX pathway
+
+```{r ind_far_enrich}
+# load or install related packages
+site="https://mirrors.tuna.tsinghua.edu.cn/CRAN"
+package_list = c("reshape2","ggplot2","devtools","bindrcpp",
+				"ggthemes","agricolae","dplyr")
+for(p in package_list){
+	if(!suppressWarnings(suppressMessages(require(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))){
+		install.packages(p, repos=site)
+		suppressWarnings(suppressMessages(library(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))
+  }
+}
+
+alpha = read.table("../data/element_tab.txt", header=T, row.names=1, sep="\t", comment.char="") 
+alpha = as.data.frame(t(alpha))
+alpha=alpha/100
+design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
+design$group=design$groupID
+sub_design = subset(design, group %in% c("HTEJ","HIND","LTEJ","LIND"))
+sub_design$group  = factor(sub_design$group, levels=c("HTEJ","HIND","LTEJ","LIND"))
+idx = rownames(sub_design) %in% rownames(alpha)
+sub_design=sub_design[idx,]
+# detach("package:ggpubr", unload=TRUE)
+# library(dplyr)
+
+list = read.table("IND.list", header=F,  sep="\t")
+sub_alpha=alpha[rownames(sub_design), as.vector(list$V1)]
+sub_alpha$sampleID=rownames(sub_alpha) 
+melted = melt(sub_alpha, id.vars = "sampleID")
+melted_all = merge(melted, sub_design[,c("subspecies","soiltype")], by.x="sampleID", by.y = "row.names", all.x = T ) 
+x = as.data.frame(melted_all %>% group_by(variable) %>%
+  summarise(mean = mean(value)))
+x = x[order(x$mean, decreasing = T),]
+x = head(x, 9)
+melted_all = melted_all[melted_all$variable %in% x$variable,]
+melted_all$variable = factor(melted_all$variable, levels = as.vector(x$variable))
+melted_all$soiltype = factor(melted_all$soiltype, levels=c("L", "H"))
+p = ggplot(melted_all, aes(x=variable, y=value, color=subspecies)) +
+  geom_boxplot(position = "dodge", alpha=1, outlier.size=0.3, size=0.5, width=0.7, fill="transparent") +
+  main_theme +
+  facet_grid(soiltype ~ .)+
+  theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))
+ggsave(paste("faprotax_IND_boxplot_top9", ".pdf", sep=""), p, width = 8, height = 5)
+p
+```
+
+### j. japonica enriched FAPROTAX pathway
+
+```{r tej_far_enrich}
+list = read.table("TEJ.list", header=F,  sep="\t")
+sub_alpha=alpha[rownames(sub_design), as.vector(list$V1)]
+sub_alpha$sampleID=rownames(sub_alpha) 
+melted = melt(sub_alpha, id.vars = "sampleID")
+melted_all = merge(melted, sub_design[,c("subspecies","soiltype")], by.x="sampleID", by.y = "row.names", all.x = T ) 
+x = as.data.frame(melted_all %>% group_by(variable) %>%
+  summarise(mean = mean(value)))
+x = x[order(x$mean, decreasing = T),]
+x = head(x, 9)
+melted_all = melted_all[melted_all$variable %in% x$variable,]
+melted_all$variable = factor(melted_all$variable, levels = as.vector(x$variable))
+melted_all$soiltype = factor(melted_all$soiltype, levels=c("L", "H"))
+p = ggplot(melted_all, aes(x=variable, y=value, color=subspecies)) +
+  geom_boxplot(position = "dodge", alpha=1, outlier.size=0.3, size=0.5, width=0.7, fill="transparent") +
+  main_theme +
+  facet_grid(soiltype ~ .)+
+  theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))
+ggsave(paste("faprotax_TEJ_boxplot_top9", ".pdf", sep=""), p, width = 8, height = 5)
+p
+```
+
+

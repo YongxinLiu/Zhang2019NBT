@@ -1,0 +1,18 @@
+x
+Xylanolysis	0.185
+Cellulolysis	0.296
+Sulfur.respiration	1.02
+Sulfur.oxidation	0.755
+Hydrogen.oxidation	7.746
+Nitrate.ammonification	7.288
+Nitrite.ammonification	7.288
+Nitrate.respiration	9.114
+Nitrite.respiration	8.237
+Nitrogen.respiration	9.191
+Manganese.respiration	1.142
+Iron.respiration	9.07
+Arsenate.respiration	0.077
+Fumarate.respiration	7.805
+Hydrocarbon.degradation	0.859
+Aromatic.degradation	0.928
+Fermentation	1.887

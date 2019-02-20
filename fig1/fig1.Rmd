@@ -238,7 +238,7 @@ if (TRUE){
 # Draw figure in phylum level and Proteobacteria class
 m = "pc"
 # read usearch taxonomy summary file
-tax_sample = read.table(paste("sum_", m, ".txt", sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+tax_sample = read.table(paste("../data/sum_", m, ".txt", sep=""), header=T, row.names=1, sep="\t", comment.char="") 
 
 # Decreased sort by abundance
 mean_sort = tax_sample[(order(-rowSums(tax_sample))), ]

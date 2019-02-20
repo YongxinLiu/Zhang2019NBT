@@ -1,0 +1,9 @@
+ID	rep1	rep2	rep3	rep4	rep5	rep6	rep7	rep8	rep9	rep10	rep11	rep12	rep13	rep14	rep15	rep16	rep17
+IR24HnCp7	indica	indica	indica	indica	japonica	indica	indica	indica	japonica	indica	indica	indica	indica	indica	indica	NA	NA
+IR24LnCp7	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	NA
+IR24HnSz7	japonica	japonica	japonica	indica	japonica	indica	indica	indica	japonica	indica	indica	indica	indica	indica	indica	japonica	indica
+IR24LnSz7	japonica	japonica	indica	indica	indica	indica	japonica	japonica	japonica	japonica	indica	japonica	japonica	japonica	japonica	NA	NA
+ZH11HnCp7	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	indica	japonica	japonica
+ZH11LnCp7	japonica	japonica	indica	japonica	indica	japonica	japonica	japonica	japonica	indica	indica	japonica	indica	japonica	japonica	japonica	indica
+ZH11HnSz7	japonica	indica	japonica	indica	indica	japonica	japonica	indica	indica	japonica	indica	indica	japonica	japonica	indica	NA	NA
+ZH11LnSz7	indica	japonica	japonica	japonica	japonica	indica	indica	japonica	japonica	japonica	japonica	japonica	indica	japonica	japonica	NA	NA
