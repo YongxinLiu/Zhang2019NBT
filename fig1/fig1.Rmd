@@ -1,0 +1,343 @@
+---
+title: "Figure 1. Root microbiota of indica and japonica. "
+author: "Yong-Xin Liu"
+date: "2019/2/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Clean workspace
+rm(list=ls()) 
+# Load setting and functions
+source("../script/stat_plot_functions.R")
+# Set output directory
+output_dir="./"
+```
+
+
+## a. World map
+
+(a) Diagram of original collection sites (44 countries) of indica (red) and japonica (blue) rice. 
+
+```{r geomap, echo=TRUE}
+library(dplyr)
+library(maptools)
+library(ggplot2)
+library(maps)
+
+geotable = read.table("varieties_geo.txt", header = T, sep = "\t")
+worldmap = map_data("world")
+
+fig1 = ggplot(geotable, aes(Longitude, Latitude, color = Subspecies)) +
+  geom_polygon(data = worldmap, aes(x = long, y = lat, group = group, fill = NA), color = "grey70", size = 0.25)+
+  geom_point(size = 2.5, alpha = 0.5)+  scale_colour_brewer(palette = "Set1") +
+  scale_fill_brewer(palette = "Set1")+  
+  coord_cartesian()+
+  scale_y_continuous(breaks = (-3:3)*30)+
+  scale_x_continuous(breaks = (-6:6)*30)+
+  labs(x="Longitude", y="Latitude", colour = "Subspecies" ) +
+  theme_tufte()
+ggsave(paste0(output_dir, "minicore-worldmap.pdf", sep=""), fig1, width = 9, height = 5)
+fig1
+```
+
+
+## b. Experiment design
+
+(b) Diagram of the experimental design for rice field trials. The indica and japonica varieties were arranged randomly. Harvested samples for each variety were surrounded by protection plants that separated the different varieties.
+
+This figure is manually drawn by Adobe Illustrator.
+
+
+## c. PCoA filed I
+
+(c) Unconstrained Principal Coordinate Analysis with Bray-Curtis distance showing that the root microbiota of indica is separate from that of japonica in field I in the first axis (P < 0.001, PERMANOVA by Adonis). Ellipses cover 68% of the data for each rice subspecies.
+
+```{r pcoa1}
+design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
+design$group=design$groupID
+
+if (TRUE){
+	sub_design = subset(design, group %in% c("LIND","LTEJ"))
+	sub_design$group  = factor(sub_design$group, levels=c("LIND","LTEJ"))
+}else{
+	sub_design = design
+}
+
+# method = c("weighted_unifrac","unweighted_unifrac","bray_curtis")
+# for(m in method){
+m = "bray_curtis"
+beta = read.table(paste(m,".txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+idx = rownames(sub_design) %in% rownames(beta)
+sub_design=sub_design[idx,]
+sub_beta=beta[rownames(sub_design),rownames(sub_design)]
+# k is dimension, 3 is recommended; eig is eigenvalues
+pcoa = cmdscale(sub_beta, k=4, eig=T)
+# get coordinate string, format to dataframme
+points = as.data.frame(pcoa$points) 
+eig = pcoa$eig
+# rename group name
+levels(sub_design$group)=c("indica","japonica")
+points = cbind(points, sub_design$group)
+colnames(points) = c("PC1", "PC2", "PC3", "PC4","group") 
+p = ggplot(points, aes(x=PC1, y=PC2, color=group)) + geom_point(alpha=.7, size=2) +
+	labs(x=paste("PCoA 1 (", format(100 * eig[1] / sum(eig), digits=4), "%)", sep=""),
+	y=paste("PCoA 2 (", format(100 * eig[2] / sum(eig), digits=4), "%)", sep=""),
+	title=paste(m," PCoA",sep="")) + theme_classic()
+p = p + stat_ellipse(level=0.68)
+ggsave(paste0(output_dir, "beta_filedI_", m, ".pdf", sep=""), p, width = 5, height = 3)
+# }
+p
+```
+
+## c. PCoA filed II
+
+(d) Unconstrained Principal Coordinate Analysis with Bray-Curtis distance showing that the root microbiota of indica is separate from that of japonica in field II in the first axis (P < 0.001, PERMANOVA by Adonis).
+
+```{r pcoa1}
+design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
+design$group=design$groupID
+
+if (TRUE){
+	sub_design = subset(design, group %in% c("HIND","HTEJ"))
+	sub_design$group  = factor(sub_design$group, levels=c("HIND","HTEJ"))
+}else{
+	sub_design = design
+}
+
+# method = c("weighted_unifrac","unweighted_unifrac","bray_curtis")
+# for(m in method){
+m = "bray_curtis"
+beta = read.table(paste(m,".txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+idx = rownames(sub_design) %in% rownames(beta)
+sub_design=sub_design[idx,]
+sub_beta=beta[rownames(sub_design),rownames(sub_design)]
+# k is dimension, 3 is recommended; eig is eigenvalues
+pcoa = cmdscale(sub_beta, k=4, eig=T)
+# get coordinate string, format to dataframme
+points = as.data.frame(pcoa$points) 
+eig = pcoa$eig
+# rename group name
+levels(sub_design$group)=c("indica","japonica")
+points = cbind(points, sub_design$group)
+colnames(points) = c("PC1", "PC2", "PC3", "PC4","group") 
+p = ggplot(points, aes(x=PC1, y=PC2, color=group)) + geom_point(alpha=.7, size=2) +
+	labs(x=paste("PCoA 1 (", format(100 * eig[1] / sum(eig), digits=4), "%)", sep=""),
+	y=paste("PCoA 2 (", format(100 * eig[2] / sum(eig), digits=4), "%)", sep=""),
+	title=paste(m," PCoA",sep="")) + theme_classic()
+p = p + stat_ellipse(level=0.68)
+ggsave(paste0(output_dir, "beta_filedII_", m, ".pdf", sep=""), p, width = 5, height = 3)
+# }
+p
+```
+
+## 1.E Boxplot show Alpha diversity
+
+(E) Shannon index of the microbiome of roots from indica, japonica, and the corresponding bulk soil in two fields. Bulk soil shows the highest microbiome diversity. The root microbiome of indica shows a significantly higher Shannon index than that of japonica in both fields.
+ 
+Plotting Alpha boxlot for field I & II
+
+```{r alpha_boxplot, echo=TRUE}
+# Read usearch alpha file
+alpha = read.table("/mnt/bai/yongxin/rice/xianGeng/result/alpha/index.txt", header=T, row.names=1, sep="\t", comment.char="") 
+
+# Read design
+design = read.table("/mnt/bai/yongxin/rice/xianGeng/doc/design.txt", header=T, row.names=1, sep="\t")
+# Uniform group column as group
+design$group=design$groupID
+
+# Select by manual set group
+if (TRUE){
+	sub_design = subset(design, group %in% c("LTEJ","LIND","LSoil1","HTEJ","HIND","HSoil1"))
+# Set group order
+	sub_design$group  = factor(sub_design$group, levels=c("LTEJ","LIND","LSoil1","HTEJ","HIND","HSoil1"))
+}else{
+	sub_design = design
+}
+
+# Cross filter
+idx = rownames(sub_design) %in% rownames(alpha)
+sub_design=sub_design[idx,]
+sub_alpha=alpha[rownames(sub_design),]
+
+# Add design to alpha
+index = cbind(sub_alpha, sub_design) 
+
+
+# sub_function. loop for statiscs and plot for each index
+method = c("chao1","richness","shannon_e")
+# for(m in method){
+  m = "shannon_e"
+	model = aov(index[[m]] ~ group, data=index)
+	Tukey_HSD = TukeyHSD(model, ordered = TRUE, conf.level = 0.95)
+	Tukey_HSD_table = as.data.frame(Tukey_HSD$group) 
+	write.table(paste(m, "\n\t", sep=""), file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/alpha_",m,".txt",sep=""),append = F, quote = F, eol = "", row.names = F, col.names = F)
+	suppressWarnings(write.table(Tukey_HSD_table, file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/alpha_",m,".txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+
+	# LSD test
+	out = LSD.test(model,"group", p.adj="none") # alternative fdr
+	stat = out$groups
+	index$stat=stat[as.character(index$group),]$groups
+	max=max(index[,c(m)])
+	min=min(index[,c(m)])
+	x = index[,c("group",m)]
+	y = x %>% group_by(group) %>% summarise_(Max=paste('max(',m,')',sep=""))
+	y=as.data.frame(y)
+	rownames(y)=y$group
+	index$y=y[as.character(index$group),]$Max + (max-min)*0.05
+	
+if (FALSE){
+	write.table(paste("SampleID\t", sep=""), file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/alpha_",m,"_raw.txt",sep=""), append = F, quote = F, eol = "", row.names = F, col.names = F)
+	suppressWarnings(write.table(index[,c(m,"group")], file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/alpha_",m,"_raw.txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+}
+
+	p = ggplot(index, aes(x=group, y=index[[m]], color=group)) +
+		geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+		labs(x="Groups", y=paste(m, "index")) + theme_classic() + main_theme +
+		geom_text(data=index, aes(x=group, y=y, color=group, label= stat)) +
+		geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)
+	if (length(unique(sub_design$group))>3){
+		p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))
+	}
+color = c("#00BFC4", "#F9766E", "#9E7C61", "#00BFC4", "#F9766E", "#9E7C61")
+  p = p + scale_color_manual(values = color)
+  # p = p + geom_violin()
+	# p
+	# ggsave(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1subspecies/alpha_", m, ".pdf", sep=""), p, width = 5, height = 3)
+	p
+# }
+```
+
+## 1.F Stackplot show taxonomy composition in Phylum level
+
+(F) Phylum-level distribution of the indica and japonica root microbiome in two fields. The differences in the root microbiome between indica and japonica were detectable at the phylum level. Major differences were detected in both fields. Acidobacteria, Bacteroidetes, Spirochaetes, Chloroflexi, Ignavibacteriae, Nitrospirae, and Verrucomicrobia show higher relative abundance in indica than japonica, while the relative abundance of Alphaproteobacteria is higher in japonica (P < 0.001). The number of biological replicates is as follows: in field I, indica (n = 201), japonica (n = 80); in field II, indica (n = 201), japonica (n = 81).
+
+
+```{r taxonomy, echo=TRUE}
+site="https://mirrors.tuna.tsinghua.edu.cn/CRAN"
+# Delect dependency, install or loading packages
+package_list = c("reshape2","ggplot2","vegan")
+# Check each packages is available
+for(p in package_list){
+	if(!suppressWarnings(suppressMessages(require(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))){
+		install.packages(p, repos=site)
+		suppressWarnings(suppressMessages(library(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))
+  }
+}
+
+# Read input file
+# Design file
+design = read.table("/mnt/bai/yongxin/rice/xianGeng/doc/design.txt", header=T, row.names=1, sep="\t")
+# Group by
+design$group = design$groupID
+
+# Select by manual set group
+if (TRUE){
+	sub_design = subset(design, group %in% c("LTEJ","LIND","LSoil1","HTEJ","HIND","HSoil1"))
+# Set group order
+	sub_design$group  = factor(sub_design$group, levels=c("LTEJ","LIND","LSoil1","HTEJ","HIND","HSoil1"))
+}else{
+	sub_design = design[,c("SampleID","group")]
+}
+
+# Draw figure in phylum level and Proteobacteria class
+
+m = method = c("pc")
+# for(m in method){
+	# read usearch taxonomy summary file
+	tax_sample = read.table(paste("/mnt/bai/yongxin/rice/xianGeng/result/tax/sum_", m, ".txt", sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+
+	# Decreased sort by abundance
+	mean_sort = tax_sample[(order(-rowSums(tax_sample))), ]
+	mean_sort = as.data.frame(mean_sort)
+	# Filter Top 9 , and other group into Low abundance
+	other = colSums(mean_sort[10:dim(mean_sort)[1], ])
+	mean_sort = mean_sort[1:(10 - 1), ]
+	mean_sort = rbind(mean_sort,other)
+	rownames(mean_sort)[10] = c("Low abundance")
+	# Double check
+	# colSums(mean_sort)
+
+	# Cross filter metadata and features table
+	idx = rownames(sub_design) %in% colnames(mean_sort)
+	sub_design=sub_design[idx,]
+	mean_sort = mean_sort[,rownames(sub_design)]
+
+
+	# 4.1 Stackplot for each samples
+	merge_tax=mean_sort
+	write.table("\t", file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_sample.txt",sep=""),append = F, quote = F, eol = "", row.names = F, col.names = F)
+	suppressWarnings(write.table(merge_tax, file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_sample.txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+
+	# Select group information
+	sampFile = data.frame(sample=row.names(sub_design), group=sub_design$group,row.names = row.names(sub_design))
+
+	# Add taxonomy
+	mean_sort$tax = rownames(mean_sort)
+	data_all = as.data.frame(melt(mean_sort, id.vars=c("tax")))
+	# Set taxonomy order by abundance, default by alphabet
+	if (FALSE){
+		data_all$tax  = factor(data_all$tax, levels=rownames(mean_sort))
+	}
+	data_all = merge(data_all, sampFile, by.x="variable", by.y = "sample")
+
+	p = ggplot(data_all, aes(x=variable, y = value, fill = tax )) + 
+		geom_bar(stat = "identity",position="fill", width=1)+ 
+		scale_y_continuous(labels = scales::percent) + 
+		facet_grid( ~ group, scales = "free_x", switch = "x") +  theme(strip.background = element_blank())+
+		theme(axis.ticks.x = element_blank(), axis.text.x = element_blank())+
+		xlab("Groups")+ylab("Percentage (%)")+ theme_classic()+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))
+	p
+	# Saving figure in PDF/PNG for editing and viewing.
+	# ggsave(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_sample.pdf", sep=""), p, width = 5, height = 3)
+	# ggsave(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_sample.png", sep=""), p, width = 5, height = 3)
+	# print(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_sample.pdf/png/txt finished.", sep = ""))
+
+
+	# 4.2 Group average stackplot
+
+	# Calculate average relative abundance for each group
+	mat_t = t(merge_tax)
+	mat_t2 = merge(sampFile, mat_t, by="row.names")
+	mat_t2 = mat_t2[,c(-1,-2)]
+	mat_mean = aggregate(mat_t2[,-1], by=mat_t2[1], FUN=mean) # mean
+	mat_mean_final = do.call(rbind, mat_mean)[-1,]
+	geno = mat_mean$group
+	colnames(mat_mean_final) = geno
+
+	mean_sort=as.data.frame(mat_mean_final)
+	write.table("\t", file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_group.txt",sep=""),append = F, quote = F, eol = "", row.names = F, col.names = F)
+	suppressWarnings(write.table(merge_tax, file=paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_group.txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+
+	# data melt for ggplot2
+	mean_sort$tax = rownames(mean_sort)
+	data_all = as.data.frame(melt(mean_sort, id.vars=c("tax")))
+	# Set taxonomy order by abundance, default by alphabet
+	if (FALSE){
+		data_all$tax  = factor(data_all$tax, levels=rownames(mean_sort))
+	}
+
+	p = ggplot(data_all, aes(x=variable, y = value, fill = tax )) + 
+	  geom_bar(stat = "identity",position="fill", width=0.7)+ 
+	  scale_y_continuous(labels = scales::percent) + 
+	  xlab("Groups")+ylab("Percentage (%)")+ theme_classic()
+	if (length(unique(data_all$variable))>3){
+		p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))
+	}
+	# library(RColorBrewer) # https://book.2cto.com/201408/45552.html
+	# display.brewer.all(type = "qual") # set discrete color
+  # p+ scale_fill_manual(values = brewer.pal(10, "Set3"))
+	p
+	# Saving figure in PDF/PNG for editing and viewing.
+	# ggsave(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1subspecies/tax_pc_", m, "_group.pdf", sep=""), p, width = 5, height = 3)
+	# ggsave(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_group.png", sep=""), p, width = 5, height = 3)
+	# print(paste("/mnt/bai/yongxin/rice/xianGeng/fig1/1/tax_pc_", m, "_group.pdf/txt finished.", sep = ""))
+
+# }
+
+
+```
+
+
+
