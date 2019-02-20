@@ -1,0 +1,315 @@
+---
+title: "Rice Microbiome Fig. 2 Random forest model detects bacterial taxa that accurately predict indica and japonica subspeciation."
+author: "Yong-Xin Liu"
+date: "2018/6/12"
+output: html_document
+---
+
+## Fig. 2A. Top Features to distinguish subspecies in family level.
+
+(A) The top 18 bacterial families were identified by applying random forest classification of the relative abundance of the root microbiome in field II against indica and japonica rice. Biomarker taxa are ranked in descending order of importance to the accuracy of the model. The inset represents 10-fold cross-validation error as a function of the number of input families used to differentiate indica and japonica root microbiome in order of variable importance. The use of 18 families was sufficient to differentiate indica and japonica with an accuracy of 83.7%.
+
+### Set work enviroment
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Clean enviroment
+rm(list=ls()) 
+source("/mnt/bai/yongxin/github/Amplicon/16Sv2/script/stat_plot_functions.R")
+system("mkdir -p 2model")
+```
+
+### Select Field II (Training Set) data
+
+Source ref in : script/randomForest_family.R
+
+```{r reads_data, echo=TRUE}
+# 一、Field II as train set, Field I as test sets 
+
+design = read.table("/mnt/bai/yongxin/rice/xianGeng/doc/design.txt", header=T, row.names=1, sep="\t") # , comment.char=""
+design$group = design$groupID
+otufile = "/mnt/bai/yongxin/rice/xianGeng/result/tax/sum_f.txt"
+otutab = read.table(paste(otufile, sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+
+# Select by manual set group
+if (TRUE){
+  sub_design = subset(design, group %in% c("HTEJ","HIND")) # ,"LTEJ","LIND"
+  #  Set group order
+  sub_design$group  = factor(sub_design$group, levels=c("HTEJ","HIND")) # ,"LTEJ","LIND"
+}
+idx = rownames(sub_design) %in% colnames(otutab)
+sub_design = sub_design[idx,]
+sub_otutab = otutab[,rownames(sub_design)]
+# head(sub_otutab)[,1:10]
+```
+
+### Randomforest classification apply to training sets
+
+```{r rf, echo=TRUE}
+# install.packages("randomForest")
+library(randomForest)
+otutab_t = as.data.frame(t(sub_otutab))
+otutab_t$group = factor(design[rownames(otutab_t),]$subspecies, levels= c("TEJ","IND"))
+set.seed(315)
+otutab_t.rf= randomForest(group ~ ., data=otutab_t, importance=TRUE, proximity=TRUE) # ntree = 1000, nPerm = 10, mtry = 3, 
+print(otutab_t.rf)
+# MeanDecreaseAccuracy
+varImpPlot(otutab_t.rf, main = "Top feature importance", n.var = 23) # , bg = par("bg"),color = par("fg"), gcolor = par("fg"), lcolor = "gray" 
+write.table(otutab_t.rf$confusion, file = "2model/family_confusion.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+imp = as.data.frame(round(importance(otutab_t.rf), 2))
+imp=imp[order(imp$MeanDecreaseAccuracy,decreasing = F),]
+write.table(imp, file = "2model/family_imp.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+system("awk 'NR==FNR{a[$6]=$3} NR>FNR{print $0\"\t\"a[$1]}' ../result/taxonomy_8.txt 2model/family_imp.txt | sed '1 s/$/Phylum/' > 2model/family_imp_phylum.txt")
+```
+
+
+### Cross validation to choose porper number of features
+
+Five time cross validation
+
+```{r cv, echo=TRUE}
+n = ncol(otutab_t)-1
+myotutab_t= otutab_t[1:n]
+set.seed(315)
+result= rfcv(myotutab_t, otutab_t$group, cv.fold=5, scale = "log", step = 0.9)
+result$n.var
+length(result$n.var)
+with(result, plot(n.var, error.cv, log="x", type="o", lwd=2))
+result1 = result
+
+error.cv = data.frame(num = result$n.var, error.1 =  result$error.cv)
+for (i in 316:(315+4)){
+  print(i)
+  set.seed(i)
+  result= rfcv(myotutab_t, otutab_t$group, cv.fold=5, scale = "log", step = 0.9)
+  error.cv = cbind(error.cv, result$error.cv)
+}
+```
+
+
+ggplot2 visualize result of cross validation
+
+```{r cv_ggplot2, echo=TRUE}
+
+n.var = error.cv$num
+error.cv = error.cv[,2:6]
+colnames(error.cv) = paste('err',1:5,sep='.')
+err.mean = apply(error.cv,1,mean)
+allerr = data.frame(num=n.var,err.mean=err.mean,error.cv)
+# number of otus selected
+optimal = 18
+
+write.table(allerr, file = "2model/family_rfcv.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+
+p = ggplot() + 
+  geom_line(aes(x = allerr$num, y = allerr$err.1), colour = 'grey') + 
+  geom_line(aes(x = allerr$num, y = allerr$err.2), colour = 'grey') + 
+  geom_line(aes(x = allerr$num, y = allerr$err.3), colour = 'grey') + 
+  geom_line(aes(x = allerr$num, y = allerr$err.4), colour = 'grey') + 
+  geom_line(aes(x = allerr$num, y = allerr$err.5), colour = 'grey') + 
+  geom_line(aes(x = allerr$num, y = allerr$err.mean), colour = 'black') + 
+  geom_vline(xintercept = optimal, colour='black', lwd=0.36, linetype="dashed") + 
+#  geom_hline(yintercept = min(allerr$err.mean), colour='black', lwd=0.36, linetype="dashed") + 
+  coord_trans(x = "log2") +
+  scale_x_continuous(breaks = c(1, 2, 5, 10, 20, 30, 50, 100, 200)) + # , max(allerr$num)
+  labs(title=paste('Training set (n = ', dim(otutab_t)[1],')', sep = ''), 
+       x='Number of families ', y='Cross-validation error rate') + 
+  annotate("text", x = optimal, y = max(allerr$err.mean), label=paste("optimal = ", optimal, sep="")) + 
+  main_theme
+ggsave(p, file = "2model/family_rfcv.pdf", width = 89, height = 50, unit = 'mm')
+p
+```
+
+
+### 2a1 Features barplot with taxonomy in phylum
+
+
+```{r feature_imp, echo=TRUE}
+imp = read.table("2model/family_imp_phylum.txt", header=T, row.names= 1, sep="\t") 
+imp = tail(imp, n = optimal)
+imp$Family = factor(rownames(imp), levels = rownames(imp))
+
+p = ggplot(imp, aes(x = Family, y = MeanDecreaseAccuracy, fill = Phylum)) + 
+  geom_bar(stat = "identity") + 
+  coord_flip() + main_theme
+ggsave(paste("2model/family_top_feautre",".pdf", sep=""), p, width=89 * 1.5, height=50 * 1.5, unit='mm')
+p
+```
+
+## Fig. 2B. Feature abundance barplot
+
+(B) Biomarker families with higher relative abundance in the root microbiome of indica (n=15) and japonica (n=3) rice. Error bars represent standard deviations. 
+
+Data prepare and draw all features abundance in two subspecies
+
+```{r feature_bar_all, echo=TRUE}
+
+otu_bar = sub_otutab[rownames(imp),] # 筛选最优的feature
+mean = data.frame(id = rownames(otu_bar), mean=rowMeans(otu_bar))
+mean = arrange(mean, desc(mean)) # 按均值排序 
+otu_bar$Family = rownames(otu_bar)
+otu_bar = melt(otu_bar, id.vars = "Family")
+head(otu_bar)
+design$sampleID = rownames(design)
+otu_bar = merge(otu_bar, design[,c("sampleID","subspecies")], by.x="variable", by.y = "sampleID", all.x = T)
+head(otu_bar)
+
+otu_error_bar = summarySE(otu_bar, measurevar="value", groupvars=c("Family","subspecies"))
+head(otu_error_bar)
+
+otu_error_bar$Family = factor(otu_error_bar$Family, levels = mean$id)
+
+p = ggplot(otu_error_bar, aes(x=Family, y=value, fill=subspecies)) + 
+  geom_bar(position=position_dodge(), stat="identity") +
+  geom_errorbar(aes(ymin=value-ci, ymax=value+ci),
+                width=.5,                    # Width of the error bars
+                position=position_dodge(.9)) + main_theme
+p=p+theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1))
+p
+ggsave(paste("2model/family_errorbar",".pdf", sep=""), p, width=89 * 1.5, height=50 * 2, unit='mm')
+
+DA_list = read.table("/mnt/bai/yongxin/rice/xianGeng/xiangeng0wilcox/result/compare_f/HTEJ-HIND_all.txt", header=T, row.names=1, sep="\t") # , comment.char=""
+DA_list = DA_list[rownames(imp) ,1:5]
+# DA_list = DA_list[order(DA_list$logCPM, decreasing = T),]
+
+DA_list$level = ifelse(DA_list$logFC>0, "Enriched","Depleted")
+
+otu_error_bar = merge(otu_error_bar, DA_list, by.x="Family", by.y = "row.names", all.x = T)
+```
+
+### Plot japonica (TEJ) enriched family
+
+```{r tej_enriched, echo=TRUE}
+TEJ = rownames(DA_list[DA_list$level == "Enriched",])
+p = ggplot(otu_error_bar[otu_error_bar$Family %in% TEJ, ], aes(x=Family, y=value, fill=subspecies)) + 
+  geom_bar(position=position_dodge(), stat="identity") +
+  geom_errorbar(aes(ymin=value-ci, ymax=value+ci),
+                width=.5,                    # Width of the error bars
+                position=position_dodge(.9)) + main_theme
+p=p+theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1))
+p
+ggsave(paste("2model/Family_barplot_TEJ",".pdf", sep=""), p, width=89 * 0.6, height=50 * 1.5, unit='mm')
+p
+```
+
+### Plot indica (IND) enriched family
+
+```{r ind_enriched, echo=TRUE}
+IND = rownames(DA_list[DA_list$level == "Depleted",])
+p = ggplot(otu_error_bar[otu_error_bar$Family %in% IND, ], aes(x=Family, y=value, fill=subspecies)) + 
+  geom_bar(position=position_dodge(), stat="identity") +
+  geom_errorbar(aes(ymin=value-ci, ymax=value+ci),
+                width=.5,                    # Width of the error bars
+                position=position_dodge(.9)) + main_theme
+p=p+theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1))
+ggsave(paste("2model/Family_barplot_IND",".pdf", sep=""), p,  width=89 * 1.5, height=50 * 1.5, unit='mm')
+p
+```
+
+## Fig. 2C Prediction result of random forest model on Field I
+
+(C) The results of prediction of indica and japonica rice in field I according to the random forest model. Each square represents an individual variety. The characteristics of the varieties are shown on the left. The predicted characteristics are shown on the right. Indica varieties (94.5% accuracy) are shown in red; japonica varieties (77.5% accuracy) are shown in blue. 
+
+Filed I (LN) as test set, 
+
+```{r test1, echo=TRUE}
+#  Select by manual set group
+if (TRUE){
+  sub_design = subset(design, group %in% c("LTEJ","LIND")) # ,
+  #  Set group order
+  sub_design$group  = factor(sub_design$group, levels=c("LTEJ","LIND")) # ,"LTEJ","LIND"
+}
+idx = rownames(sub_design) %in% colnames(otutab)
+sub_design = sub_design[idx,]
+sub_otutab = otutab[,rownames(sub_design)]
+head(sub_otutab)[,1:10]
+
+
+
+otutab_t = as.data.frame(t(sub_otutab))
+otutab_t$group = factor(design[rownames(otutab_t),]$subspecies, levels= c("TEJ","IND"))
+
+set.seed(315)
+otutab.pred = predict(otutab_t.rf, otutab_t )  
+pre_tab = table(observed=otutab_t[,"group"], predicted=otutab.pred) 
+pre_tab
+
+predict = data.frame(group = otutab_t[,"group"], predicted=otutab.pred)
+
+write.table(predict, file = "ST/04RF_prediction_FieldILN.txt", quote = F, row.names = T, col.names = T, sep = "\t")
+system("sed -i 's/group/ID\tsubspecies/;s/IND/indica/g;s/TEJ/japonica/g' ST/04RF_prediction_FieldILN.txt")
+
+predict$result = ifelse(predict$group == predict$predicted, 1, 0)
+predict$predict = ifelse(predict$predicted == "IND", 1, 2)
+column = 17
+
+IND = predict[predict$group=="IND",]$predict
+length(IND)
+row = round(length(IND)/column + 0.5)
+i = column * row - length(IND)
+IND = c(IND, rep(NA, i))
+matrix = matrix(IND, nrow = row, ncol = column, byrow = T)
+pheatmap(matrix, color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12)
+pheatmap(matrix, color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12,
+         filename = "2model/family_test_IND.pdf")
+
+TEJ = predict[predict$group=="TEJ",]$predict
+length(TEJ)
+row = round(length(TEJ)/column + 0.5)
+i = column * row - length(TEJ)
+TEJ = c(TEJ, rep(NA, i))
+matrix = matrix(TEJ, nrow = row, ncol = column, byrow = T)
+pheatmap(matrix, color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12,
+         filename = "2model/family_test_TEJ.pdf")
+pheatmap(matrix, color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12)
+```
+
+
+## Fig. 2D. Classified varieties not in trainning set and grown in new locations
+
+(D) The results of prediction of indica and japonica varieties that were not included in the training set and were grown in different geographical locations, according to the random forest model. The plants were grown in Changping Farm in northern China, which is located 2,482 km away from the fields in Lingshui Farm where the indica and japonica training sets were grown (Table S4). The results suggest that our model represents the general characteristics of the root microbiome from indica and japonica varieties grown in different geographical locations.  
+
+
+
+```{r test2, echo=TRUE}
+grouplist = c("IR24HnCp7", "IR24LnCp7", "IR24HnSz7", "IR24LnSz7", "ZH11HnCp7", "ZH11LnCp7", "ZH11HnSz7", "ZH11LnSz7")
+design_sub = subset(design, groupID %in% grouplist)
+
+predict = matrix(0, ncol = 8, nrow = 17)
+colnames(predict) = grouplist
+column = 17
+
+for(i in 1:length(grouplist)) {
+  #i = 1
+  design_sub2 = subset(design_sub, groupID %in% grouplist[i])
+  idx = rownames(design_sub2) %in% colnames(otutab)
+  design_sub2 = design_sub2[idx,]
+  otutab_sub = otutab[,rownames(design_sub2)]
+  otutab_sub=as.data.frame(t(otutab_sub))
+  #otutab_sub$group = as.vector(design_sub2$subspecies)
+  set.seed(315)
+  otutab.pred = predict(otutab_t.rf, otutab_sub)
+  otutab.pred
+  levels(otutab.pred) = c(2, 1)
+  j = column - length(otutab.pred)
+  predict[, i]= c(as.vector(otutab.pred), rep(NA, j))
+}
+matrix = matrix(as.numeric(predict), ncol = 8, nrow = 17)
+colnames(matrix) = grouplist
+matrix = t(matrix)
+colnames(matrix) = paste("rep", 1:17, sep = "")
+
+write.table(matrix, file = "ST/04RF_predict_test2.txt", quote = F, row.names = T, col.names = T, sep = "\t")
+system("sed -i 's/rep1/ID\trep1/;s/\t1/\tindica/g;s/\t2/\tjaponica/g' ST/04RF_predict_test2.txt")
+
+
+# pheatmap(matrix, color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12)
+pheatmap(matrix[1:4, 1:16], color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12,
+         filename = "2model/family_test_nrt_IND.pdf")
+pheatmap(matrix[1:4, 1:16], color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12)
+
+pheatmap(matrix[5:8,], color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12,
+         filename = "2model/family_test_nrt_TEJ.pdf")
+pheatmap(matrix[5:8,], color = c("#F9766E", "#00BFC4") , cluster_rows = F, cluster_cols = F, cellwidth = 15, cellheight = 12)
+```
+
