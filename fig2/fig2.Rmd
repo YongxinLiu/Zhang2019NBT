@@ -20,76 +20,12 @@ output_dir="./"
 
 (a) The top 18 bacterial families were identified by applying random-forest classification of the relative abundance of the root microbiota in field II against indica and japonica rice. Biomarker taxa are ranked in descending order of importance to the accuracy of the model. The inset represents 10-fold cross-validation error as a function of the number of input families used to differentiate indica and japonica root microbiota in order of variable importance. 
 
-Field II as train set, Field I as test sets
+Load RandomForest model for plotting
 
-```{r select_train_set, echo=TRUE}
-#  Select Field II (Training Set) data
-design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
-design$group = design$groupID
-otufile = "sum_f.txt"
-otutab = read.table(paste(otufile, sep=""), header=T, row.names=1, sep="\t", comment.char="") 
-
-# Select by manual set group
-if (TRUE){
-  sub_design = subset(design, group %in% c("HTEJ","HIND")) 
-  sub_design$group  = factor(sub_design$group, levels=c("HTEJ","HIND"))
-}
-idx = rownames(sub_design) %in% colnames(otutab)
-sub_design = sub_design[idx,]
-sub_otutab = otutab[,rownames(sub_design)]
-# head(sub_otutab)[,1:10]
+```{r load}
+load("model.RData")
 ```
 
-Randomforest classification apply to training set
-
-```{r rf, echo=TRUE}
-# install.packages("randomForest")
-library(randomForest)
-
-# otutab need transposition for randomForest function
-otutab_t = as.data.frame(t(sub_otutab))
-
-# Set classification info.
-otutab_t$group = factor(design[rownames(otutab_t),]$subspecies, levels= c("TEJ","IND"))
-
-# set random seed for reproducible
-set.seed(315)
-
-# RandomForest Classification
-otutab_t.rf= randomForest(group ~ ., data=otutab_t, importance=TRUE, proximity=TRUE)
-print(otutab_t.rf)
-
-# MeanDecreaseAccuracy
-# varImpPlot(otutab_t.rf, main = "Top feature importance", n.var = 23)
-write.table(otutab_t.rf$confusion, file = "family_confusion.txt", sep = "\t", quote = F, row.names = T, col.names = T)
-imp = as.data.frame(round(importance(otutab_t.rf), 2))
-imp=imp[order(imp$MeanDecreaseAccuracy,decreasing = F),]
-write.table(imp, file = "family_imp.txt", sep = "\t", quote = F, row.names = T, col.names = T)
-# Add phylum annotation
-system("awk 'NR==FNR{a[$6]=$3} NR>FNR{print $0\"\t\"a[$1]}' ../data/taxonomy_8.txt family_imp.txt | sed '1 s/$/Phylum/' > family_imp_phylum.txt")
-```
-
-Cross validation to choose porper number of features
-
-```{r cv, echo=TRUE}
-# great time consumption, need 5-30 minutes
-n = ncol(otutab_t)-1
-myotutab_t= otutab_t[1:n]
-set.seed(315)
-result= rfcv(myotutab_t, otutab_t$group, cv.fold=5, scale = "log", step = 0.9)
-# result$n.var
-# length(result$n.var)
-with(result, plot(n.var, error.cv, log="x", type="o", lwd=2))
-result1 = result
-
-error.cv = data.frame(num = result$n.var, error.1 =  result$error.cv)
-for (i in 316:(315+4)){
-  print(i)
-  set.seed(i)
-  result= rfcv(myotutab_t, otutab_t$group, cv.fold=5, scale = "log", step = 0.9)
-  error.cv = cbind(error.cv, result$error.cv)
-}
-```
 
 ### a1. Cross validation
 
@@ -166,13 +102,13 @@ otu_error_bar = summarySE(otu_bar, measurevar="value", groupvars=c("Family","sub
 
 otu_error_bar$Family = factor(otu_error_bar$Family, levels = mean$id)
 
-p = ggplot(otu_error_bar, aes(x=Family, y=value, fill=subspecies)) + 
-  geom_bar(position=position_dodge(), stat="identity") +
-  geom_errorbar(aes(ymin=value-ci, ymax=value+ci),
-                width=.5,                    # Width of the error bars
-                position=position_dodge(.9)) + main_theme
-p=p+theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1))
-p
+# p = ggplot(otu_error_bar, aes(x=Family, y=value, fill=subspecies)) + 
+#   geom_bar(position=position_dodge(), stat="identity") +
+#   geom_errorbar(aes(ymin=value-ci, ymax=value+ci),
+#                 width=.5,                    # Width of the error bars
+#                 position=position_dodge(.9)) + main_theme
+# p=p+theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1))
+# p
 # ggsave(paste("family_errorbar",".pdf", sep=""), p, width=89 * 1.5, height=50 * 2, unit='mm')
 
 DA_list = read.table("f_HTEJ-HIND_all.txt", header=T, row.names=1, sep="\t") # , comment.char=""
@@ -231,6 +167,7 @@ otutab_t$group = factor(design[rownames(otutab_t),]$subspecies, levels= c("TEJ",
 
 # apply model on test set
 set.seed(315)
+library(randomForest)
 otutab.pred = predict(otutab_t.rf, otutab_t )  
 pre_tab = table(observed=otutab_t[,"group"], predicted=otutab.pred) 
 pre_tab
