@@ -1,0 +1,15 @@
+---
+title: "Figure 5. Rice root-associated bacterial culture collections capture majority of bacterial species that are reproducibly detectable by culture-independent sequencing."
+author: "Yong-Xin Liu"
+date: "2019/2/22"
+output: html_document
+---
+
+
+## a-c. Graphlan plot Cladogram
+
+(a) Culture-dependent coverage (70.8%) of indica root-associated bacteria. The inner ring represents the root-associated OTUs reproducibly detected in the roots of IR24 (with relative abundance greater than 0.1%). The outer ring with black squares represents OTUs that are founded in the cultivated bacteria derived from IR24. The relative abundances of root-associated OTUs from IR24 are shown in outmost ring of the white and brown heat map. (b) Culture-dependent coverage (71.7%) of japonica root-associated bacteria. The inner ring represents the root-associated OTUs reproducibly detected in the roots of Nipponbare (with relative abundance greater than 0.1%). The outer ring with black squares represents OTUs that are founded in the cultivated bacteria derived from Nipponbare. The relative abundances of root-associated OTUs are shown in outmost ring of the white and brown heat map. (c) Taxonomic distribution of 515 bacterial unique 16S sequence from 1079 purified indica- or japonica-derived bacteria (Supplementary Table 11). The origin of isolates is shown in the out rings (indica as yellow and japonica magenta).
+
+All the data in Supplementary Table 11.
+
+The method of visualization in http://huttenhower.sph.harvard.edu/GraPhlAn

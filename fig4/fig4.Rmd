@@ -1,0 +1,316 @@
+---
+title: "Figure 4. NRT1.1B contributes to the variation in the root microbiota of indica and japonica."
+author: "Yong-Xin Liu"
+date: "2019/2/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Clean workspace
+rm(list=ls()) 
+# Load setting and functions
+source("../script/stat_plot_functions.R")
+# Set output directory
+output_dir="./"
+```
+
+## a. Nitrogen cycle pathway relation with NRT1.1b SNP
+
+(a) Cumulative relative abundance of ammonification function correlates with the natural variation in NRT1.1B in indica and japonica populations (P = 2.2  10-16 in field I; P = 1.8  10-12 in field II, two-sided t-test). NRT1.1Bindica harbors a “T” at 980 bp downstream of the ATG start codon and NRT1.1Bjaponica harbors a “C” at the same position, resulting in an amino acid substitution (p. Met327Thr). The number of biological replicates is as follows: in field I, indica (n = 192), japonica (n = 86); in field II, indica (n = 192), japonica (n = 87).
+
+Rice SNP data download from reference: Wang, H., Xu, X., Vieira, F.G., Xiao, Y., Li, Z., Wang, J., Nielsen, R., and Chu, C. (2016). The Power of Inbreeding: NGS-Based GWAS of Rice Reveals Convergent Evolution during Rice Domestication. Mol. Plant 9, 975-985.
+
+```{r snp}
+design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
+design$group = design$groupID
+design$sampleID = rownames(design)
+
+genotype = read.table("good_snp.geno", header=T, row.names=1, sep="\t", comment.char="")
+colnames(genotype)
+genotype = as.data.frame(t(genotype))
+colnames(genotype) = gsub('^', 'S', colnames(genotype))
+snp_list = colnames(genotype) 
+
+design2 = merge(design, genotype, by.x = "genotype", by.y = "row.names", all.x = T) 
+design = na.omit(design2)
+rownames(design) = design$sampleID 
+
+if (TRUE){
+  design = subset(design, group %in% c("HTEJ","HIND","LTEJ","LIND"))
+  design$group  = factor(design$group, levels=c("HTEJ","HIND","LTEJ","LIND"))
+}
+# save design with SNP
+write.table(design, file = "design.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+
+otutab = read.table(paste("../data/element_tab.txt", sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+idx = rownames(design) %in% colnames(otutab)
+design = design[idx,]
+otutab = otutab[,rownames(design)]
+design$sampleID =  rownames(design)
+otutab = otutab/100
+
+final = merge(t(otutab), design, by="row.names")
+final$soiltype = factor(final$soiltype, levels=c("L", "H"))
+# default wilcox.test, alternative t-test
+p = ggboxplot(final, x= "S10m21759092" , y="nitrite_ammonification", color="S10m21759092", palette = c("#F9766E", "#00BFC4"), add = "jitter", facet.by = "soiltype") + stat_compare_means(method = "t.test")
+ggsave(paste("nrt1.1b_nitrite_ammonification", ".pdf", sep=""), p, width = 8, height = 5)
+p
+
+# batch draw function related with SNP
+fun_list = rownames(otutab)
+# match nitrogene related 14 pathway
+fun_list = fun_list[grepl("nitr", fun_list)] 
+# select Fig3I six nitrogene related in indica enriched top9 pathway
+fun_list = fun_list[c(12, 13, 11, 10, 9, 8)]
+for (i in fun_list){
+  p = ggboxplot(final, x= "S10m21759092" , y=i, color="S10m21759092", palette = c("#F9766E", "#00BFC4"), add = "jitter", facet.by = "soiltype") + stat_compare_means(method = "t.test") + main_theme
+  p
+  ggsave(paste("nrt1.1b_",i, ".pdf", sep=""), p, width = 8, height = 5)
+}
+
+# stat sample number in each genotype
+summary(final$soiltype == "L" & final$S10m21759092 == "A")
+summary(final$soiltype == "L" & final$S10m21759092 == "G")
+summary(final$soiltype == "H" & final$S10m21759092 == "A")
+summary(final$soiltype == "H" & final$S10m21759092 == "G")
+```
+
+
+## b. PCoA nrt1.1b
+
+http://bailab.genetics.ac.cn/report/16Sv2/xiangeng0wilcox/result-diversity.html#diversity-pcoa
+
+(b) Unconstrained principal coordinate analysis of Bray-Curtis distance showing that the root microbiota of ZH11 (wild type), nrt1.1b, NRT1.1Bindica, and NRT1.1Bjaponica separate in the first two axes. Ellipses cover 68% of the data for each genotype. The number of biological replicates is as follows: ZH11 (n = 16), nrt1.1b (n = 14), NRT1.1Bindica (n = 15), and NRT1.1Bjaponica (n = 15). 
+
+```{r pcoa_nrt}
+design = read.table("../data/design.txt", header=T, row.names=1, sep="\t")
+design$group=design$groupID
+
+if (TRUE){
+	sub_design = subset(design, group %in% c("V3703HnCp6","ZH11HnCp6","A50LnCp7","A56LnCp7"))
+	sub_design$group  = factor(sub_design$group, levels=c("V3703HnCp6","ZH11HnCp6","A50LnCp7","A56LnCp7"))
+}else{
+	sub_design = design
+}
+
+# method = c("weighted_unifrac","unweighted_unifrac","bray_curtis")
+# for(m in method){
+m = "bray_curtis"
+beta = read.table(paste("../data/",m,".txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+idx = rownames(sub_design) %in% rownames(beta)
+sub_design=sub_design[idx,]
+sub_beta=beta[rownames(sub_design),rownames(sub_design)]
+# k is dimension, 3 is recommended; eig is eigenvalues
+pcoa = cmdscale(sub_beta, k=4, eig=T)
+# get coordinate string, format to dataframme
+points = as.data.frame(pcoa$points) 
+eig = pcoa$eig
+# rename group name
+levels(sub_design$group)=c("nrt1.1b","ZH11","NipponbareNRT1.1bjaponica","NipponbareNRT1.1bindica")
+points = cbind(points, sub_design$group)
+colnames(points) = c("PC1", "PC2", "PC3", "PC4","group") 
+p = ggplot(points, aes(x=PC1, y=PC2, color=group)) + geom_point(alpha=.7, size=2) +
+	labs(x=paste("PCoA 1 (", format(100 * eig[1] / sum(eig), digits=4), "%)", sep=""),
+	y=paste("PCoA 2 (", format(100 * eig[2] / sum(eig), digits=4), "%)", sep=""),
+	title=paste(m," PCoA",sep="")) + theme_classic()
+p = p + stat_ellipse(level=0.68)
+ggsave(paste0(output_dir, "beta_nrt1.1b_", m, ".pdf", sep=""), p, width = 5, height = 3)
+# }
+p
+```
+
+
+## c. Venn diagram of indica enriched vs nrt1.1b depleted
+
+(c) The overlap of OTUs depleted in the nrt1.1b mutant and indica-enriched OTUs in two fields. 
+
+```{r venn, echo=TRUE}
+library(VennDiagram)
+num =3
+data <- read.table(file="../data/diff.list", sep="\t", quote="")
+HTEJ_HIND_D <- data[grepl("\\<HTEJ_HIND_D\\>",data[,2]),1]
+LTEJ_LIND_D <- data[grepl("\\<LTEJ_LIND_D\\>",data[,2]),1]
+V3703HnCp6_ZH11HnCp6_D <- data[grepl("\\<V3703HnCp6_ZH11HnCp6_D\\>",data[,2]),1]
+color_v <- c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3")[1:num]
+p <- venn.diagram( 
+	x = list("indica enriched in field I"=LTEJ_LIND_D, "indica enriched in field II"=HTEJ_HIND_D, "nrt1.1b depleted"=V3703HnCp6_ZH11HnCp6_D),
+	filename = NULL, col = "transparent", 
+	fill = color_v,
+	alpha = 0.50,
+	label.col = c("black"),
+	cex = 1, fontfamily = "Helvetica",
+	cat.default.pos="outer",
+	cat.pos=0, margin=0.1,  
+	cat.col = color_v,cat.cex = 1, cat.fontfamily = "Helvetica"
+)
+grid.draw(p)
+```
+
+## d. Venn diagram of indica enriched vs NIL depleted
+
+(d) The overlap of OTUs enriched in NRT1.1Bindica compared to NRT1.1Bjaponica and indica-enriched OTUs in two fields. 
+
+```{r venn2, echo=TRUE}
+library(VennDiagram)
+num =3
+data <- read.table(file="../data/diff.list", sep="\t", quote="")
+HTEJ_HIND_D <- data[grepl("\\<HTEJ_HIND_D\\>",data[,2]),1]
+LTEJ_LIND_D <- data[grepl("\\<LTEJ_LIND_D\\>",data[,2]),1]
+A50LnCp7_A56LnCp7_D <- data[grepl("\\<A50LnCp7_A56LnCp7_D\\>",data[,2]),1]
+color_v <- c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3")[1:num]
+p <- venn.diagram( 
+	x = list("indica enriched in field I"=LTEJ_LIND_D, "indica enriched in field II"=HTEJ_HIND_D, "Nipponbare NRT1.1Bindica enriched"=A50LnCp7_A56LnCp7_D),
+	filename = NULL, col = "transparent", 
+	fill = color_v,
+	alpha = 0.50,
+	label.col = c("black"),
+	cex = 1, fontfamily = "Helvetica",
+	cat.default.pos="outer",
+	cat.pos=0, margin=0.1,  
+	cat.col = color_v,cat.cex = 1, cat.fontfamily = "Helvetica"
+)
+grid.draw(p)
+```
+
+## e. Taxonomy composition of overlapped OTUs in c
+
+```{r venn_taxc}
+taxonomy = read.table("../data/taxonomy_8.txt", header=T, row.names=1, sep="\t", comment.char = "", stringsAsFactors = F)
+taxonomy$otu = rownames(taxonomy)
+taxonomy = arrange(taxonomy, Kingdom, Phylum, Class, Order, Family, Genus, Species)
+rownames(taxonomy) = taxonomy$otu
+taxonomy$PhylumPro = taxonomy$Phylum
+taxonomy[taxonomy$PhylumPro %in% "Proteobacteria",]$PhylumPro =  taxonomy[taxonomy$PhylumPro %in% "Proteobacteria",]$Class # no level can get value
+
+# Keep two figure have same legend color
+enriched = read.table("venn_nrt_indiaHL.txt", header=F, sep="\t", stringsAsFactors = F)
+depleted = read.table("venn_NRTsnp_indiaHL.txt", header=F, sep="\t", stringsAsFactors = F)
+all = rbind(enriched, depleted)
+all = taxonomy[rownames(taxonomy) %in% all$V1,]
+legend = unique(all$PhylumPro)
+# legend
+
+per= read.delim("../data/sum_pc.txt", sep = "\t", row.names=1, header=T)
+mean = rowMeans(per)
+per = as.data.frame(mean[order(mean, decreasing = T)])
+top_tax=head(rownames(per), n=9)
+taxonomy[!(taxonomy$PhylumPro %in% top_tax),]$PhylumPro = "Low Abundance" # no level can get value
+
+idx = legend %in% top_tax
+legend = legend[idx]
+legend = c(legend, "Low Abundance")
+
+# enriched
+merge = merge(enriched, taxonomy[,c("PhylumPro"), drop=F], by.x = "V1", by.y = "row.names", all.x=T )
+merge$PhylumPro = factor(merge$PhylumPro, levels = legend)
+
+da_tax = merge
+da_tax$tax = da_tax$PhylumPro
+
+data = data.frame(tax = legend, count = rep(0, length(legend)))
+da_tax$count=rep(1,length(da_tax$tax)) # add each family count is 1
+sub_tax=da_tax[,c("tax","count")] # fetch tax and count to new dataframe
+
+sub_tax=rbind.data.frame(sub_tax,data)
+mat_mean <- aggregate(sub_tax[,-1], by=sub_tax[1], FUN=sum) # mean
+rownames(mat_mean)=mat_mean$tax
+
+nums <- mat_mean$x
+tax = mat_mean$tax
+df <- data.frame(type = tax, nums = nums)  
+
+p <- ggplot(data = df, mapping = aes(x = 'Content', y = nums, fill = type)) + geom_bar(stat = 'identity', position = 'stack', width = 1)  
+# Draw total number in inner, size = 3 is 9 pt
+label=rep(sum(df$nums),length(df$nums))
+p = p + coord_polar(theta = 'y') + labs(x = '', y = '', title = '') + theme(axis.text = element_blank()) + theme(axis.ticks = element_blank()) + theme(legend.position = "none") + geom_text(aes(x = 0, label = label), size = 3) + theme(panel.background=element_blank(),panel.grid=element_blank())
+ggsave(file=paste("pie_otu_nrt_depleted.pdf", sep=""), p, width = 4, height = 2.5, useDingbats=F) # 1/4 of half page
+p
+```
+
+## f. Taxonomy composition of overlapped OTUs in d
+
+```{r venn_taxd}
+merge = merge(depleted, taxonomy[,c("PhylumPro"), drop=F], by.x = "V1", by.y = "row.names", all.x=T )
+merge$PhylumPro = factor(merge$PhylumPro, levels = legend)
+
+da_tax = merge
+da_tax$tax = da_tax$PhylumPro
+
+data = data.frame(tax = legend, count = rep(0, length(legend)))
+da_tax$count=rep(1,length(da_tax$tax)) # add each family count is 1
+sub_tax=da_tax[,c("tax","count")] # fetch tax and count to new dataframe
+
+sub_tax=rbind.data.frame(sub_tax,data)
+mat_mean <- aggregate(sub_tax[,-1], by=sub_tax[1], FUN=sum) # mean
+rownames(mat_mean)=mat_mean$tax
+
+nums <- mat_mean$x
+tax = mat_mean$tax
+df <- data.frame(type = tax, nums = nums)  
+p <- ggplot(data = df, mapping = aes(x = 'Content', y = nums, fill = type)) + geom_bar(stat = 'identity', position = 'stack', width = 1)  
+label=rep(sum(df$nums),length(df$nums))
+p = p + coord_polar(theta = 'y') + labs(x = '', y = '', title = '') + theme(axis.text = element_blank()) + theme(axis.ticks = element_blank()) + theme(legend.position = "none") + geom_text(aes(x = 0, label = label), size = 3) + theme(panel.background=element_blank(),panel.grid=element_blank())
+ggsave(file=paste("pie_otu_A50_depleted.pdf", sep=""), p, width = 4, height = 2.5, useDingbats=F) # 1/4 of half page
+p
+```
+
+## g. Metagenome analysis of NRT1.1 gene mutant
+
+ (g) NRT1.1B regulates genes related to the formation of ammonium in the root microbiota. Diagram of microbial pathways related to soil nitrogen cycle. The relative abundances of ammonification genes, NapA (FDR adjusted P = 0.031, Welch’s t-test) and NapB (FDR adjusted P = 0.027, Welch’s t-test) were significantly less abundant in the root microbiome of the nrt1.1b mutant. Although the change of NirD did not pass statistical threshold after multiple test correction (FDR adjusted P = 0.057, Welch’s t-test), it showed a clear trends of reduction in the nrt1.1b mutant. In this figure, the horizontal bars within boxes represent medians. The tops and bottoms of boxes represent 75th and 25th quartiles, respectively. The upper and lower whiskers extend 1.5 × the interquartile range from the upper edge and lower edge of the box, respectively. * indicates significant difference at FDR adjusted P < 0.05. The number of biological replicates is as follows: ZH11 (n = 3), nrt1.1b (n = 3). 
+ 
+```{r barplot}
+# read files
+alpha = read.table("ko.txt", header=T, row.names=1, sep="\t", comment.char="") 
+alpha = as.data.frame(t(alpha))
+alpha = as.data.frame(alpha/rowSums(alpha,na=T) * 100)
+design = read.table("meta_design.txt", header=T, row.names=1, sep="\t")
+design$group=design$group
+sub_design = subset(design, group %in% c("HnZH11","HnNrt"))
+sub_design$group  = factor(sub_design$group, levels=c("HnZH11","HnNrt"))
+
+idx = rownames(sub_design) %in% rownames(alpha)
+sub_design=sub_design[idx, , drop=F]
+sub_alpha=alpha[rownames(sub_design),]
+
+# add design to alpha
+index = cbind(sub_alpha, sub_design) 
+levels(index$group)=c("ZH11","nrt1.1b")
+
+# loop for each KO
+# method = c("K02568","K02567","K00363","K10535","K00362")
+# for(m in method){
+# K02567 NapA;K02568 NapB;K00363 NirD
+# You can change the KO ID to visualize each KO  
+  m = "K02567"
+	model = aov(index[[m]] ~ group, data=index)
+	Tukey_HSD = TukeyHSD(model, ordered = TRUE, conf.level = 0.95)
+	Tukey_HSD_table = as.data.frame(Tukey_HSD$group) 
+	out = LSD.test(model,"group", p.adj="none") # alternative fdr
+	stat = out$groups
+	index$stat=stat[as.character(index$group),]$groups
+	max=max(index[,c(m)])
+	min=min(index[,c(m)])
+	x = index[,c("group",m)]
+	y = x %>% group_by(group) %>% summarise_(Max=paste('max(',m,')',sep=""))
+	y=as.data.frame(y)
+	rownames(y)=y$group
+	index$y=y[as.character(index$group),]$Max + (max-min)*0.05
+	p = ggplot(index, aes(x=group, y=index[[m]], color=group)) +
+		geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+		labs(x="Groups", y=paste(m, "")) + theme_classic() + main_theme +
+		geom_text(data=index, aes(x=group, y=y, color=group, label= stat)) +
+		geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)
+	ggsave(paste("./", m, ".pdf", sep=""), p, width = 2.5, height = 2)
+	p
+# }
+```
+
+KEGG website: https://www.kegg.jp/kegg/pathway.html 
+
+nitrogen metabolism pathway: https://www.genome.jp/dbget-bin/www_bget?pathway:map00910
+
+KEGG function abundance table were difference tests and corrections by STAMP.
+
+Results showing in figure were visualized by Adobe Illustrator.
+

@@ -110,7 +110,7 @@ if (TRUE){
 # method = c("weighted_unifrac","unweighted_unifrac","bray_curtis")
 # for(m in method){
 m = "bray_curtis"
-beta = read.table(paste(m,".txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
+beta = read.table(paste("../data/",m,".txt",sep=""), header=T, row.names=1, sep="\t", comment.char="") 
 idx = rownames(sub_design) %in% rownames(beta)
 sub_design=sub_design[idx,]
 sub_beta=beta[rownames(sub_design),rownames(sub_design)]

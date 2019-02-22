@@ -1,0 +1,167 @@
+---
+title: "Figure 6. Indica-enriched SynCom have stronger ability to promote rice growth under the supply of organic nitrogen than japonica-enriched SynCom."
+author: "Yong-Xin Liu"
+date: "2019/2/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Clean workspace
+rm(list=ls()) 
+# Load setting and functions
+source("../script/stat_plot_functions.R")
+# Set output directory
+output_dir="./"
+```
+
+IR24 rice plants were grown under inorganic nitrogen and organic nitrogen conditions (a mixture of 5 amino acids, Supplementary Table 12) with and without synthetic bacterial communities, including indica-enriched bacteria, japonica-enriched bacteria, soil-enriched bacteria, and corresponding heated killed bacteria as controls, respectively (Supplementary Table 12). After 2-week bacterial inoculation, rice plants are measured by root length (a), plant height (b), and shoot fresh weight (c). Boxplot shows combined data from three independent inoculation experiments with 3-5 technical replicates each (Supplementary Table 13). Different letters indicate significantly different groups (P < 0.05, ANOVA, Tukey-HSD). The horizontal bars within boxes represent medians. The tops and bottoms of boxes represent 75th and 25th quartiles, respectively. The upper and lower whiskers extend 1.5 × the interquartile range from the upper edge and lower edge of the box, respectively.
+
+
+```{r}
+group_list = c("GfIn", "GfOr", "IeOr", "JeOr", "SeOr", "IedOr", "JedOr", "SedOr")
+A50 = paste0("A50", group_list)
+IR24 = paste0("Ir24", group_list)
+
+# A50 IR24
+variety = "Ir24"
+```
+
+
+## a. Root Length
+
+```{r RootLength, eval=TRUE, include=TRUE}
+m="RootLength"
+# read raw data"RootLength"
+df = read.table("Sycom.txt", header=T, row.names=1, sep="\t")
+
+# boxplot parameter 
+index = df
+index$group = index$GroupID
+# colnames(df)
+
+# data filter
+index = index[,c("group", m)]
+index = na.omit(index)
+
+index=subset(index, group %in% IR24)
+index$group = factor(index$group, levels = IR24)
+# boxplot stat code
+model = aov(index[[m]] ~ group, data=index)
+Tukey_HSD = TukeyHSD(model, ordered = TRUE, conf.level = 0.95)
+Tukey_HSD_table = as.data.frame(Tukey_HSD$group) 
+write.table(paste(m, "\n\t", sep=""), file=paste(output_dir, variety, m,  ".txt",sep=""),append = F, quote = F, eol = "", row.names = F, col.names = F)
+suppressWarnings(write.table(Tukey_HSD_table, file=paste(output_dir,variety,m,".txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+
+out = LSD.test(model,"group", p.adj="none") # alternative fdr
+stat = out$groups
+index$stat=stat[as.character(index$group),]$groups
+max=max(index[,c(m)])
+min=min(index[,c(m)])
+x = index[,c("group",m)]
+y = x %>% group_by(group) %>% summarise_(Max=paste('max(',m,')',sep=""))
+y=as.data.frame(y)
+rownames(y)=y$group
+index$y=y[as.character(index$group),]$Max + (max-min)*0.05
+
+p = ggplot(index, aes(x=group, y=index[[m]], color=group)) +
+	geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+	labs(x="Groups", y=paste(m, "")) + theme_classic() + main_theme +
+	geom_text(data=index, aes(x=group, y=y, color=group, label= stat)) +
+	geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")
+if (length(unique(index$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+ggsave(paste(output_dir, variety,m, ".pdf", sep=""), p, width = 5, height = 2.5)
+p
+```
+
+
+## b. PlantHeight
+
+```{r PlantHeight, eval=TRUE, include=TRUE}
+m="PlantHeight"
+df = read.table("Sycom.txt", header=T, row.names=1, sep="\t")
+
+# boxplot parameter 
+index = df
+index$group = index$GroupID
+# colnames(df)
+
+# data filter
+index = index[,c("group", m)]
+index = na.omit(index)
+
+index=subset(index, group %in% IR24)
+index$group = factor(index$group, levels = IR24)
+# boxplot stat code
+model = aov(index[[m]] ~ group, data=index)
+Tukey_HSD = TukeyHSD(model, ordered = TRUE, conf.level = 0.95)
+Tukey_HSD_table = as.data.frame(Tukey_HSD$group) 
+write.table(paste(m, "\n\t", sep=""), file=paste(output_dir, variety, m,  ".txt",sep=""),append = F, quote = F, eol = "", row.names = F, col.names = F)
+suppressWarnings(write.table(Tukey_HSD_table, file=paste(output_dir,variety,m,".txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+
+out = LSD.test(model,"group", p.adj="none") # alternative fdr
+stat = out$groups
+index$stat=stat[as.character(index$group),]$groups
+max=max(index[,c(m)])
+min=min(index[,c(m)])
+x = index[,c("group",m)]
+y = x %>% group_by(group) %>% summarise_(Max=paste('max(',m,')',sep=""))
+y=as.data.frame(y)
+rownames(y)=y$group
+index$y=y[as.character(index$group),]$Max + (max-min)*0.05
+
+p = ggplot(index, aes(x=group, y=index[[m]], color=group)) +
+	geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+	labs(x="Groups", y=paste(m, "")) + theme_classic() + main_theme +
+	geom_text(data=index, aes(x=group, y=y, color=group, label= stat)) +
+	geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")
+if (length(unique(index$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+ggsave(paste(output_dir, variety,m, ".pdf", sep=""), p, width = 5, height = 2.5)
+p
+```
+
+
+## c. Fresh Weight
+
+```{r FreshWeight, eval=TRUE, include=TRUE}
+m="FreshWeight"
+df = read.table("Sycom.txt", header=T, row.names=1, sep="\t")
+
+# boxplot parameter 
+index = df
+index$group = index$GroupID
+# colnames(df)
+
+# data filter
+index = index[,c("group", m)]
+index = na.omit(index)
+
+index=subset(index, group %in% IR24)
+index$group = factor(index$group, levels = IR24)
+# boxplot stat code
+model = aov(index[[m]] ~ group, data=index)
+Tukey_HSD = TukeyHSD(model, ordered = TRUE, conf.level = 0.95)
+Tukey_HSD_table = as.data.frame(Tukey_HSD$group) 
+write.table(paste(m, "\n\t", sep=""), file=paste(output_dir, variety, m,  ".txt",sep=""),append = F, quote = F, eol = "", row.names = F, col.names = F)
+suppressWarnings(write.table(Tukey_HSD_table, file=paste(output_dir,variety,m,".txt",sep=""), append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = T, col.names = T))
+
+out = LSD.test(model,"group", p.adj="none") # alternative fdr
+stat = out$groups
+index$stat=stat[as.character(index$group),]$groups
+max=max(index[,c(m)])
+min=min(index[,c(m)])
+x = index[,c("group",m)]
+y = x %>% group_by(group) %>% summarise_(Max=paste('max(',m,')',sep=""))
+y=as.data.frame(y)
+rownames(y)=y$group
+index$y=y[as.character(index$group),]$Max + (max-min)*0.05
+
+p = ggplot(index, aes(x=group, y=index[[m]], color=group)) +
+	geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+	labs(x="Groups", y=paste(m, "")) + theme_classic() + main_theme +
+	geom_text(data=index, aes(x=group, y=y, color=group, label= stat)) +
+	geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")
+if (length(unique(index$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+ggsave(paste(output_dir, variety,m, ".pdf", sep=""), p, width = 5, height = 2.5)
+p
+```

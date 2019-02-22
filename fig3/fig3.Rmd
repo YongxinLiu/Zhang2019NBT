@@ -5,7 +5,7 @@ date: "2019/2/20"
 output: html_document
 ---
 
-```{r init, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Clean workspace
 rm(list=ls()) 

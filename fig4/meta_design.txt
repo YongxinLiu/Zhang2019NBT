@@ -1,0 +1,7 @@
+SampleID	group
+HnZH11r10	HnZH11
+HnZH11r11	HnZH11
+HnZH11r12	HnZH11
+HnNrt34	HnNrt
+HnNrt35	HnNrt
+HnNrt36	HnNrt
