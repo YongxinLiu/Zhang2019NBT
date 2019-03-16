@@ -25,7 +25,7 @@
 
 ## 2.2 安装bioconductor常用包
   
-  package_list = c("digest", "ggrepel")
+  package_list = c("ggrepel")
   for(p in package_list){
     if(!suppressWarnings(suppressMessages(require(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))){
       source("https://bioconductor.org/biocLite.R")

@@ -1,6 +1,6 @@
 # Zhang2019NBT
 
-Scripts for statistics and plotting figures in "Transporter NTR1.1B contributes the association of root microbiota and nitrogen use in rice", published in Nature Biotechnology 2019.
+Scripts for statistics and plotting figures in "NRT1.1B is associated with root microbiota composition and nitrogen use in field-grown rice", published in Nature Biotechnology 2019.
 
 - /data # metadata, OTU table and taxonomy files
 - /fig1-6 # raw data, Rmarkdown scripts and output HTML format results
@@ -11,4 +11,4 @@ Scripts for statistics and plotting figures in "Transporter NTR1.1B contributes 
 
 If you used these scripts, please cited the paper below:
 
-Zhang, et.al. Transporter NTR1.1B contributes the association of root microbiota and nitrogen use in rice. 2019. Nature Biotechnology.
+Jingying Zhang#, Yong-Xin Liu#, Na Zhang#, Bin Hu#, Tao Jin#, ..., Chengcai Chu*, Yang Bai*. NRT1.1B is associated with root microbiota composition and nitrogen use in field-grown rice. 2019. Nature Biotechnology.

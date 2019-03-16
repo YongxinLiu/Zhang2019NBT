@@ -348,6 +348,24 @@ faprotax.sub = faprotax.sub[high_cor$V1, ]
 faprotax.sub = faprotax.sub[, colSums(faprotax.sub)>0]
 faprotax_list_all = colnames(faprotax.sub)
 
+# adjust label
+library(Hmisc)
+label = colnames(faprotax.sub)
+label = gsub("dark_", "", label)
+label = gsub("_", " ", label)
+label = capitalize(label)
+
+all = faprotax.sub
+colnames(all) = label
+
+# plot supplementary figure 6
+pheatmap(all, cluster_rows = F, filename = "FigureS6a.pdf",
+         cellwidth = 7, cellheight = 4,
+         cluster_cols = F, fontsize=5, boder_color = F, show_rownames = T, show_colnames = T)
+write.table(all, file = "FigureS6a.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+system("sed -i '1 s/^/OTUID\t/' FigureS6a.txt")
+
+
 # Manually select topic relation pathway
 func_list = read.table("faprotax.id", header=F,  sep="\t", comment.char="", stringsAsFactors = F)
 func_list$V1 %in% colnames(faprotax.sub)
@@ -470,6 +488,25 @@ x[is.na(x)] = 0
 faprotax.sub =x
 rownames(faprotax.sub) = faprotax.sub$Row.names
 faprotax.sub = faprotax.sub[,-(1:2)]
+faprotax.sub = faprotax.sub[high_cor$V1, ]
+
+# adjust label
+library(Hmisc)
+label = colnames(faprotax.sub)
+label = gsub("dark_", "", label)
+label = gsub("_", " ", label)
+label = capitalize(label)
+
+all = faprotax.sub
+colnames(all) = label
+
+# plot supplementary figure 6
+pheatmap(all, cluster_rows = F, filename = "FigureS6c.pdf",
+         cellwidth = 7, cellheight = 4,
+         cluster_cols = F, fontsize=5, boder_color = F, show_rownames = T, show_colnames = T)
+write.table(all, file = "FigureS6c.txt", sep = "\t", quote = F, row.names = T, col.names = T)
+system("sed -i '1 s/^/OTUID\t/' FigureS6a.txt")
+
 faprotax.sub = faprotax.sub[high_cor$V1, func_list$V1]
 
 # Rename label: replace underline to space, uppercase firest alphabeta, and short some long name
