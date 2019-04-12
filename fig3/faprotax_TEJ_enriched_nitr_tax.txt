@@ -1,0 +1,5 @@
+OTU_12	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bradyrhizobium
+OTU_196	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Herbaspirillum
+OTU_23	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Ensifer
+OTU_75	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Rhodospirillaceae	Azospirillum
+OTU_86	Proteobacteria	Betaproteobacteria	Burkholderiales	Alcaligenaceae	Achromobacter

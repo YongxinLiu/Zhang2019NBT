@@ -1,0 +1,13 @@
+Supplementary Table 1: Soil properties and cultivation practices of Field I and Field II in Lingshui farm.													
+													
+Soil properties (n=3)													
+													
+	pH	Organic matter (mg kg-1)	Available N (mg kg-1)	Available P (mg kg-1)	Available K (mg kg-1)	Fe (mg kg-1)	Mn (mg kg-1)	Cu (mg kg-1)	Zn (mg kg-1)	Sand (%)	Silt (%)	Clay (%)	Soil type 
+Field I	5.5 ±  0.07	17572.50 ± 325.94	85.33 ± 5.11	53.86 ± 3.03	185.26 ± 13.35	330.98 ± 50.66	85.93 ± 6.34	1.92 ± 0.14	1.80 ± 0.44	28.8 ± 2.2	66.7 ± 2.1	4.5 ± 0.3	silty loam
+Field II	5.2 ±  0.16	23430.00 ± 328.74	185.51 ± 6.88	48.96 ± 1.84	205.85 ± 12.89	210.72 ± 55.57	99.21 ± 11.33	1.84 ± 0.25	1.81 ± 0.30	27.4 ± 2.1	67.6 ± 2.0	5.0 ± 0.2	silty loam
+													
+cultivation practice													
+													
+	2005-2013	2014	2015	2016									
+rice variety in Field I	hybrid rice 	Peiza1303	Peiza1303	Peiza1303									
+rice variety in Field II	hybrid rice 	Teyou009	Teyou009	Teyou009									

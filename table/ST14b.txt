@@ -1,0 +1,51 @@
+Supplementary Table 14b: Experimental procedue used for culture-independent community profiling.								
+1. DNA Concentration: 3.5 ng/ul measured with picogreen								
+								
+2. First step PCR								
+								
+30ul mixture	reaction	MM-x	number of samples		Cycling: 			
+PCR mixture 	1	4.5	28		Step	temp °	time	back to, __x
+Buffer	6	27	756		1	98°	30''	
+dNTP	2.4	10.8	302.4		14	98°	10''	
+RN-1 (reverse primer)with partial read 2	0.75	3.375	94.5		15	55°	15''	
+Qiagen water	16.8	75.6	2116.8		16	72°	1'	
+PrimeSTAR HS	0.3	1.35	37.8		17			25x
+MM--(-template - F primer)	26.25	118.125	3307.5		18	72°	5'	
+FN-1 with sample barcode and partial read 1 (n=60)	0.75	3.375			19	4°	∞	
+gDNA (3.5ng/ul）	3							
+Total	30							
+								
+Description：Please mix solutions after each step with 12-channel pipette								
+MM--：master mix without DNA templates and forward primers								
+MM-：master mix without DNA templates 								
+								
+Distribute MM--	Distribute 118.125 µl MM-- to each well in 1 row of a new 96-well plate							
+Add F primers to MM-- 	Add 3.375 µl FN-1(barcode-799F) to each well							
+Distribute MM- for NT	Distribute 27 ul of MM- to wells D or H							
+Add templates to MM-	Add 10.5 ul of DNA in MM-							
+Distribute MM	Distribute 30 ul of MM to wells A,B,C or E,F,G							
+								
+3. The purified PCR products were measured by Nanodrop and diluted into 10 ng/ul.								
+								
+4. Second step PCR								
+								
+30ul mixture	reaction	MM-x	number of samples		Cycling: 			
+PCR mixture 	1	4.5	28		Step	temp °	time	back to, __x
+Buffer	6	27	756		1	98°	30''	
+dNTP	2.4	10.8	302.4		14	98°	10''	
+FN-2 (forward primer)with P5 and read 1	0.75	3.375	94.5		15	55°	15''	
+RN-2 with read2, library Index and P7 (n=48, per Index for 60 samples)	0.75	3.375	94.5		16	72°	1'	
+Qiagen water	13.8	62.1	1738.8		17			8x
+PrimeSTAR HS	0.3	1.35	37.8		18	72°	5'	
+MM-	24	108	3024		19	4°	∞	
+gDNA (10ng/ul）	6							
+Total	30							
+								
+Description：Please mix solutions after each step with 12-channel pipette								
+MM-：master mix without DNA templates 								
+								
+								
+Distribute MM-	Distribute 108 µl MM- to each well in 1 row of a new 96-well plate							
+Distribute MM- for NT	Distribute 24 ul of MM- to wells D or H							
+Add templates to MM-	Add 21 ul of DNA in MM-							
+Distribute MM	Distribute 30 ul of MM to wells A,B,C or E,F,G							

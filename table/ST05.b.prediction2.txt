@@ -1,0 +1,12 @@
+Supplementary Table 5c: Outcomes of prediction for varieties grown in Beijing.																			
+variety (indica)	location	field	rep1	rep2	rep3	rep4	rep5	rep6	rep7	rep8	rep9	rep10	rep11	rep12	rep13	rep14	rep15	rep16	
+IR24	Changping	A	indica	indica	indica	indica	japonica	indica	indica	indica	japonica	indica	indica	indica	indica	indica	indica	NA	
+IR24	Changping	B	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	indica	
+IR24	Shangzhuang	A	japonica	indica	japonica	indica	japonica	indica	indica	indica	japonica	indica	indica	indica	indica	indica	indica	japonica	
+IR24	Shangzhuang	B	japonica	japonica	indica	indica	indica	indica	japonica	japonica	japonica	japonica	indica	japonica	japonica	japonica	japonica	NA	
+																			
+variety (japonica)	location	field	rep1	rep2	rep3	rep4	rep5	rep6	rep7	rep8	rep9	rep10	rep11	rep12	rep13	rep14	rep15	rep16	rep17
+ZH11	Changping	A	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	japonica	indica	japonica	japonica
+ZH11	Changping	B	japonica	japonica	indica	japonica	indica	japonica	japonica	japonica	japonica	indica	indica	japonica	indica	japonica	japonica	japonica	indica
+ZH11	Shangzhuang	A	japonica	indica	japonica	indica	indica	japonica	japonica	indica	indica	japonica	indica	indica	japonica	japonica	indica	NA	NA
+ZH11	Shangzhuang	B	indica	japonica	japonica	japonica	japonica	indica	indica	japonica	japonica	japonica	japonica	japonica	indica	japonica	japonica	NA	NA

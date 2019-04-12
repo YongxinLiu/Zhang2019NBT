@@ -1,0 +1,30 @@
+Alcaligenaceae	Proteobacteria		Yes
+Oxalobacteraceae	Proteobacteria		Yes
+Comamonadaceae	Proteobacteria		Yes
+Rhodospirillaceae	Proteobacteria		Yes
+Rhodobacteraceae	Proteobacteria		Yes
+Mitochondria	Proteobacteria		
+Caulobacteraceae	Proteobacteria		Yes
+Unnamed50	Proteobacteria		Yes
+Rhizobiaceae	Proteobacteria		Yes
+Sphingomonadaceae	Proteobacteria		Yes
+Xanthomonadaceae	Proteobacteria		Yes
+Alteromonadaceae	Proteobacteria		
+Shewanellaceae	Proteobacteria		
+Chromatiaceae	Proteobacteria		Yes
+Aeromonadaceae	Proteobacteria		Yes
+Enterobacteriaceae	Proteobacteria		Yes
+Pseudomonadaceae	Proteobacteria		Yes
+Thermomonosporaceae	Actinobacteria		Yes
+Cellulomonadaceae	Actinobacteria		Yes
+Microbacteriaceae	Actinobacteria		Yes
+Clostridiaceae	Firmicutes		
+Peptostreptococcaceae	Firmicutes		
+Bacillaceae	Firmicutes		Yes
+Paenibacillaceae	Firmicutes		
+Exiguobacteraceae	Firmicutes		Yes
+Sphingobacteriaceae	Bacteroidetes		Yes
+Porphyromonadaceae	Bacteroidetes		
+Bacteroidaceae	Bacteroidetes		
+Flavobacteriaceae	Bacteroidetes		Yes
+Weeksellaceae	Bacteroidetes		Yes

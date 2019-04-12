@@ -1,0 +1,18 @@
+Supplementary Table 7d: Relative abundance of japonica-enriched OTUs in FAPROTAX pathway.																		
+OTUID	Xylanolysis	Cellulolysis	Sulfur respiration	Sulfur oxidation	Hydrogen oxidation	Nitrate ammonification	Nitrite ammonification	Nitrate respiration	Nitrite respiration	Nitrogen respiration	Manganese respiration	Iron respiration	Arsenate respiration	Fumarate respiration	Hydrocarbon degradation	Aromatic degradation	Fermentation	Mean(RA%)
+OTU_128	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0.07804
+OTU_152	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0.02462
+OTU_10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.8094
+OTU_60	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.21345
+OTU_23	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.73596
+OTU_70	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.17294
+OTU_196	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.99573
+OTU_25	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.89872
+OTU_3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	10.66612
+OTU_12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1.38467
+OTU_15	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1.42026
+OTU_86	0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	0	0	0.11177
+OTU_43	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0.35128
+OTU_1971	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+OTU_55	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.01895
+OTU_75	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.37336

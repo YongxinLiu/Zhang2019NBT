@@ -1,0 +1,95 @@
+Supplementary Table 12: Experimental design of synthetic consortia on germ-free plants related to the nitrogen assay.										
+										
+A: Germ-Free Rice Planting System										
+Culture Flask	Volume = 670 mL									
+Clay	200 g per flask, sterilize in wet  condition in autoclave (121 ℃ 30 min) for three times									
+Nutrient Solution (Inorganic)	250 mL per flask, sterilize before using, components as follows									
+	KNO3	101.1 mg/L								
+	NH4Cl	132.14 mg/L								
+	KCl	74.55 mg/L								
+	CaCl2·2H2O	53.655 mg/L								
+	MgSO4·7H2O	135.04 mg/L								
+	FeSO4-EDTA	1 mL/L								
+	Na2SiO3·9H2O	349.25 mg/L								
+	KH2PO4	24.8 mg/L								
+	H3BO3	2.86 mg/L								
+	CuSO4·5H2O	0.08 mg/L								
+	ZnSO4·7H2O	0.22 mg/L								
+	MnCl2·4H2O	1.81 mg/L								
+	(NH4)6Mo7O24·4H2O	0.098 mg/L								
+Nutrient Solution (Organic)	250 mL per flask, sterilize before using, components as follows									
+	L-Glutamate Sodium	53.466 mg/L								
+	L-Leucine	37.48 mg/L								
+	L-Phenylalanine	47.197 mg/L								
+	L-Valine	33.471 mg/L								
+	L-Glycine	21.449 mg/L								
+	CaCl2·2H2O	53.655 mg/L								
+	MgSO4·7H2O	135.04 mg/L								
+	FeSO4-EDTA	1 mL/L								
+	Na2SiO3·9H2O	349.25 mg/L								
+	KH2PO4	24.8 mg/L								
+	H3BO3	2.86 mg/L								
+	CuSO4·5H2O	0.08 mg/L								
+	ZnSO4·7H2O	0.22 mg/L								
+	MnCl2·4H2O	1.81 mg/L								
+	(NH4)6Mo7O24·4H2O	0.098 mg/L								
+										
+B: Synthetic Community(SynCom) Composition										
+Dilute each bacteria solution to OD=0.5, add 2 mL equivalence mixture according to their groups to each flask										
+GroupName	Stock	Taxonomic Status								
+		Phylum	Class	Order	Family	Genus	Species			
+Indica-enriched SynCom	R1281	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides	Nocardioides_kribbensis			
+	R1287	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiales_incertae_sedis	Piscinibacter	Piscinibacter_aquaticus			
+	R1383	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus	Bacillus_firmus			
+	R1396	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia	Devosia_chinhatensis			
+	R1398	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Micromonospora	Micromonospora_chalcea			
+	R1417	Actinobacteria	Actinobacteria	Actinomycetales	Cellulomonadaceae	Cellulomonas	Cellulomonas_persica			
+	R1418	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Phenylobacterium	Phenylobacterium_lituiforme			
+	R1515	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Herbaspirillum	Herbaspirillum_rubrisubalbicans			
+	R1522	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces	Streptomyces_mutomycini			
+	R1535	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus	Bacillus_safensis			
+	R1608	Actinobacteria	Actinobacteria	Solirubrobacterales	Conexibacteraceae	Conexibacter	Conexibacter_arvalis			
+	R1889	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia	Devosia_insulae			
+	R2027	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus	Bacillus_huizhouensis			
+	R2074	Proteobacteria	Betaproteobacteria	Neisseriales	Neisseriaceae	Vogesella	Vogesella_lacus			
+	R1388b	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Asticcacaulis	Asticcacaulis_excentricus			
+	R2078b	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus	Bacillus_safensis			
+Japonica-enriched SynCom	R3	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Acidovorax	Acidovorax_avenae			
+	R115	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Ensifer	Ensifer_mexicanus			
+	R992	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylobacteriaceae	Microvirga	Microvirga_lupini			
+Soil-enriched SynCom	R2217a	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Tetrasphaera	Tetrasphaera_duodecadis			
+										
+C: Treatment of Each Group										
+Group Name	Nitrogen Condition	Variety	Synthetic Community 							
+Ir24GfIn	Inorganic(NH4+:NO3-=1:1)	IR24	Germ Free							
+Ir24GfOr	Organic	IR24	Germ Free							
+Ir24IeOr	Organic	IR24	Indica-enriched SynCom							
+Ir24JeOr	Organic	IR24	Japonica-enriched SynCom							
+Ir24SeOr	Organic	IR24	Soil-enriched SynCom							
+Ir24IehOr	Organic	IR24	Heat Killed Indica-enriched SynCom							
+Ir24JehOr	Organic	IR24	Heat Killed Japonica-enriched SynCom							
+Ir24SehOr	Organic	IR24	Heat Killed Soil-enriched SynCom							
+Ir24IeIn	Inorganic(NH4+:NO3-=1:1)	IR24	Indica-enriched SynCom							
+Ir24JeIn	Inorganic(NH4+:NO3-=1:1)	IR24	Japonica-enriched SynCom							
+Ir24IehIn	Inorganic(NH4+:NO3-=1:1)	IR24	Heat Killed Indica-enriched SynCom							
+Ir24JehIn	Inorganic(NH4+:NO3-=1:1)	IR24	Heat Killed Japonica-enriched SynCom							
+NipGfIn0v2	Inorganic(NH4+:NO3-=0:2)	Nipponbare	Germ Free							
+NipGfIn2v0	Inorganic(NH4+:NO3-=2:0)	Nipponbare	Germ Free							
+NipGfIn1v1	Inorganic(NH4+:NO3-=1:1)	Nipponbare	Germ Free							
+NipGfIn1v2	Inorganic(NH4+:NO3-=1:2)	Nipponbare	Germ Free							
+NipGfIn2v1	Inorganic(NH4+:NO3-=2:1)	Nipponbare	Germ Free							
+Ir24GfIn0v2	Inorganic(NH4+:NO3-=0:2)	IR24	Germ Free							
+Ir24GfIn2v0	Inorganic(NH4+:NO3-=2:0)	IR24	Germ Free							
+Ir24GfIn1v1	Inorganic(NH4+:NO3-=1:1)	IR24	Germ Free							
+Ir24GfIn1v2	Inorganic(NH4+:NO3-=1:2)	IR24	Germ Free							
+Ir24GfIn2v1	Inorganic(NH4+:NO3-=2:1)	IR24	Germ Free							
+NipIeIn0v2	Inorganic(NH4+:NO3-=0:2)	Nipponbare	Indica-enriched SynCom							
+NipIeIn2v0	Inorganic(NH4+:NO3-=2:0)	Nipponbare	Indica-enriched SynCom							
+NipIeIn1v1	Inorganic(NH4+:NO3-=1:1)	Nipponbare	Indica-enriched SynCom							
+NipIeIn1v2	Inorganic(NH4+:NO3-=1:2)	Nipponbare	Indica-enriched SynCom							
+NipIeIn2v1	Inorganic(NH4+:NO3-=2:1)	Nipponbare	Indica-enriched SynCom							
+Ir24IeIn0v2	Inorganic(NH4+:NO3-=0:2)	IR24	Indica-enriched SynCom							
+Ir24IeIn2v0	Inorganic(NH4+:NO3-=2:0)	IR24	Indica-enriched SynCom							
+Ir24IeIn1v1	Inorganic(NH4+:NO3-=1:1)	IR24	Indica-enriched SynCom							
+Ir24IeIn1v2	Inorganic(NH4+:NO3-=1:2)	IR24	Indica-enriched SynCom							
+Ir24IeIn2v1	Inorganic(NH4+:NO3-=2:1)	IR24	Indica-enriched SynCom							

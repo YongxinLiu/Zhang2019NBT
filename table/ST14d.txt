@@ -1,0 +1,66 @@
+Supplementary Table 14d: Experimental procedue used for bacterial identification.														
+1. Extract bacteria DNA(Buffer 1 and Buffer 2)														
+														
+2. First step PCR（enrichment bacteria DNA）-HS taq enzyme														
+														
+30ul mixture	reaction	MM-x	number of samples		Cycling: 									
+PCR mixture	1	4.5	28		Step	temp °	time	back to, __x						
+10*Buffer	3	13.5	378		1	94°	2'							
+dNTP	2.4	10.8	302.4		14	94°	30''							
+799F	0.3	1.35	37.8		15	55°	30''							
+1193R	0.3	1.35	37.8		16	72°	1'							
+Qiagen water	20.85	93.825	2627.1		17			29x						
+HS taq	0.15	0.675	18.9		18	72°	5'							
+MM-(-template)	27	121.5	3402		19	4°	∞							
+gDNA (3.5ng/ul）	3													
+Total	30													
+														
+														
+Description：Please mix solutions after each step with 12-channel pipette														
+MM-：master mix without DNA templates 														
+														
+Distribute MM-	Distribute 121.5 µl MM- to each well in 1 row of a new 96-well plate													
+Distribute MM- for each well	Distribute 27 ul of MM- to wells A,B,C,D or E,F,G,H													
+Add templates to MM-	Distribute 3ul of gDNA to each wells A,B,C,D or E,F,G,H													
+														
+														
+3. PCR products of each 96-well were diluted by 40 times for the second step PCR.														
+														
+4. two-step PCR protocol using the degenerate primers 799F and 1193R containing well- and plate-specific barcodes to amplify the variable regions V5 to V7.														
+														
+Model of two steps amplicon system														
+		P5[25]	Read 1[33]		F-Barcode[10]	799F[19]	16S rRNA gene[394]	1193R[18]	R-Barcode[6]	Read 2[33]		Short Linker[2]	Index[6]	P7[24]
+														
+														
+														
+														
+														
+						799F[19]		1193R						
+														
+														
+		F1						BacRX-1-InY						
+														
+														
+														
+														
+														
+30ul Mixture	reaction	MM-x	number of samples		Cycling: 									
+PCR	1	4.5	28		Step	temp °	time	back to, __x						
+10*Buffer	3	13.5	378		1	94°	2'							
+dNTP	2.4	10.8	302.4		14	94°	30''							
+BacRX-1-InY 	0.6	2.7	75.6		15	55°	30''							
+Qiagen water	20.25	91.125	2551.5		16	72°	1'							
+HS taq	0.15	0.675	18.9		17			24x						
+MM--(-template - F primer)	26.4	118.8	3326.4		18	72°	5'							
+FN with sample barcode	0.6	2.7			19	4°	∞							
+gDNA (diluted by 40 times of PCR1）	3													
+Total	30													
+														
+Description：Please mix solutions after each step with 12-channel pipette														
+MM--：master mix without DNA templates and forward primers														
+MM-：master mix without DNA templates 														
+														
+Distribute MM--	Distribute 118.8 µl MM-- to each well in 1 row of a new 96-well plate													
+Add F primers to MM-- 	Add 2.7 µl FN(barcode-799F) to each well													
+Distribute MM- for NT	Distribute 27 ul of MM- to wells A,B,C,D or E,F,G,H													
+Add templates to MM-	Distribute 3ul of gDNA to each wells A,B,C,D or E,F,G,H													

@@ -1,0 +1,17 @@
+Supplementary Table 8b: Differential abundance OTUs between NRT1.1Bindica and NRT1.1Bjaponica.												
+Nipponbare NRT1.1B  japonica vs indica	logFC	logCPM	P value	FDR	level	Phylum	Class	Order	Family	Genus	MeanA	MeanB
+OTU_102	1.905	14.571	3.51E-06	0.000668087	Enriched	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Dissulfuribacter	0.823	0.22
+OTU_11	-0.506	16.094	1.55E-05	0.00148109	Depleted	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter	3.701	5.255
+OTU_142	2.779	14.584	9.03E-08	3.44E-05	Enriched	Proteobacteria	Alphaproteobacteria	Rhizobiales	Clostridiales_Incertae_Sedis_III	Caldicellulosiruptor	0.926	0.135
+OTU_146	1.026	9.837	0.001665215	0.045317633	Enriched	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Marmoricola	0.044	0.021
+OTU_169	1.139	10.368	0.00069555	0.026500457	Enriched	Proteobacteria	Clostridia	Clostridiales	Ruminococcaceae	Pseudobacteroides	0.066	0.03
+OTU_210	0.924	10.658	0.000112534	0.005359433	Enriched	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Lapillicoccus	0.082	0.043
+OTU_22	-0.661	15.685	0.001665215	0.045317633	Depleted	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Cystobacter	1.579	2.497
+OTU_235	1.201	11.367	8.98E-05	0.005359433	Enriched	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides	0.133	0.058
+OTU_24	1.485	13.67	0.001665215	0.045317633	Enriched	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Chryseobacterium	0.239	0.085
+OTU_30	-1.057	16.208	0.001408119	0.045317633	Depleted	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Georgfuchsia	1.66	3.453
+OTU_37	-0.589	13.844	0.000478141	0.02024129	Depleted	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Geobacter	0.554	0.833
+OTU_45	-0.81	13.852	0.000112534	0.005359433	Depleted	Spirochaetes	Spirochaetia	Spirochaetales	Leptospiraceae	Leptonema	0.569	0.997
+OTU_8	-0.508	18.425	1.18E-05	0.00148109	Depleted	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter	19.708	28.031
+OTU_81	-0.463	12.684	0.00196295	0.04985894	Depleted	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Sulfuritalea	0.347	0.479
+OTU_87	0.922	11.624	4.40E-05	0.003356155	Enriched	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae	Arthrobacter	0.175	0.093

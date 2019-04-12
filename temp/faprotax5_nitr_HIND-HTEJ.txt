@@ -1,0 +1,22 @@
+
+OTU_11	0.921	17.675	2.09192680108172e-12	1.59404822242427e-10	Enriched	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter	Anaeromyxobacter_dehalogenans	6.354	3.356
+OTU_119	0.495	13.586	1.43198836739086e-06	9.40668220648131e-06	Enriched	Bacteria	Acidobacteria	Holophagae	Holophagales	Holophagaceae	Geothrix	Geothrix_fermentans	0.415	0.294
+OTU_121	0.865	11.954	5.68008642313094e-09	8.01523306375144e-08	Enriched	Bacteria	Ignavibacteriae	Ignavibacteria	Ignavibacteriales	Ignavibacteriaceae	Melioribacter	Melioribacter_roseus	0.107	0.058
+OTU_138	0.581	13.755	7.52155786805955e-06	3.92563499689135e-05	Enriched	Bacteria	Proteobacteria	Betaproteobacteria	Gallionellales	Gallionellaceae	Sideroxydans	Sulfuricella_denitrificans	0.393	0.263
+OTU_1517	0.629	9.992	2.18353724724123e-08	2.45882836965809e-07	Enriched	Bacteria	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Thermodesulfovibrio	Thermodesulfovibrio_hydrogeniphilus	0.038	0.025
+OTU_195	1.384	13.278	1.8489909872215e-09	3.42435685489023e-08	Enriched	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Sulfuritalea	Sulfuritalea_hydrogenivorans	0.092	0.035
+OTU_1954	0.615	14.861	4.28715240895204e-09	6.80585444921136e-08	Enriched	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter	Anaeromyxobacter_dehalogenans	0.686	0.448
+OTU_201	0.497	11.978	6.56195161234915e-06	3.47236606153476e-05	Enriched	Bacteria	Proteobacteria	Actinobacteria	Actinomycetales	Xanthomonadaceae	Streptomyces	Ardenticatena_maritima	0.065	0.046
+OTU_243	0.517	11.4	0.00220852289988518	0.00576333715654968	Enriched	Bacteria	Acidobacteria	Holophagae	Holophagales	Holophagaceae	Geothrix	Geothrix_fermentans	0.058	0.04
+OTU_30	0.647	14.646	0.000442576648655135	0.00141698910199669	Enriched	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Georgfuchsia	Georgfuchsia_toluolica	0.528	0.337
+OTU_310	0.549	10.412	8.39067143688464e-05	0.000326208756882964	Enriched	Bacteria	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Thermodesulfovibrio	Thermodesulfovibrio_hydrogeniphilus	0.03	0.021
+OTU_340	0.9	10.926	1.88744078615997e-09	3.42435685489023e-08	Enriched	Bacteria	Proteobacteria	Gammaproteobacteria	Chromatiales	Thioalkalispiraceae	Thioprofundum	Thioprofundum_hispidum	0.038	0.02
+OTU_350	0.482	12.668	7.90862071720898e-08	7.72611408527339e-07	Enriched	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter	Anaeromyxobacter_dehalogenans	0.231	0.166
+OTU_406	0.281	10.646	0.000385740776690486	0.00125613022153056	Enriched	Bacteria	Ignavibacteriae	Ignavibacteria	Ignavibacteriales	Ignavibacteriaceae	Melioribacter	Melioribacter_roseus	0.041	0.033
+OTU_506	0.54	10.167	1.25463364385052e-05	6.0208407032166e-05	Enriched	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sulfuricellaceae	Sulfuriferula	Sulfuriferula_multivorans	0.037	0.026
+OTU_529	0.353	10.905	0.00231742016599393	0.00592576830153577	Enriched	Bacteria	Chloroflexi	Deltaproteobacteria	Ardenticatenales	Ardenticatenaceae	Ardenticatena	Ardenticatena_maritima	0.037	0.029
+OTU_587	0.316	10.847	0.00341478509579952	0.00807732286221462	Enriched	Bacteria	Proteobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Ardenticatena	Ardenticatena_maritima	0.031	0.025
+OTU_61	0.603	13.177	3.83454492267328e-08	4.05822670982922e-07	Enriched	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter	Geobacter_argillaceus	0.313	0.206
+OTU_8	0.776	11.548	6.50913113516002e-07	4.76919031249225e-06	Enriched	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter	Anaeromyxobacter_dehalogenans	0.059	0.034
+OTU_81	0.918	14.098	7.15865179871068e-14	1.36372316765439e-11	Enriched	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Sulfuritalea	Sulfuritalea_hydrogenivorans	0.632	0.335
+OTU_888	0.549	10.781	0.000163096506295417	0.000586224234892018	Enriched	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces	Ardenticatena_maritima	0.025	0.017

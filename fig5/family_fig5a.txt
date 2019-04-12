@@ -1,0 +1,55 @@
+Geobacteraceae	Proteobacteria	
+Unnamed37	Proteobacteria	
+Unnamed56	Proteobacteria	
+Unnamed227	Proteobacteria	
+Cystobacteraceae	Proteobacteria	
+Myxococcaceae	Proteobacteria	
+Sphingomonadaceae	Proteobacteria	Yes
+Mitochondria	Proteobacteria	
+Rhodobacteraceae	Proteobacteria	Yes
+Caulobacteraceae	Proteobacteria	Yes
+Hyphomicrobiaceae	Proteobacteria	
+Unnamed50	Proteobacteria	
+Bradyrhizobiaceae	Proteobacteria	Yes
+Methylocystaceae	Proteobacteria	Yes
+Rhizobiaceae	Proteobacteria	Yes
+Unnamed119	Proteobacteria	
+Unnamed117	Proteobacteria	
+Unnamed60	Proteobacteria	
+Xanthomonadaceae	Proteobacteria	Yes
+Sinobacteraceae	Proteobacteria	Yes
+Crenotrichaceae	Proteobacteria	
+Methylococcaceae	Proteobacteria	
+Pseudomonadaceae	Proteobacteria	Yes
+Aeromonadaceae	Proteobacteria	Yes
+Enterobacteriaceae	Proteobacteria	Yes
+Gallionellaceae	Proteobacteria	
+Rhodocyclaceae	Proteobacteria	Yes
+Unnamed54	Proteobacteria	
+Unnamed178	Proteobacteria	
+Unnamed112	Proteobacteria	
+Unnamed191	Proteobacteria	
+Unnamed16	Proteobacteria	
+Burkholderiaceae	Proteobacteria	
+Oxalobacteraceae	Proteobacteria	Yes
+Comamonadaceae	Proteobacteria	Yes
+Spirochaetaceae	Others	
+Deinococcaceae	Others	Yes
+Unnamed6	Others	
+Unnamed132	Others	
+Paenibacillaceae	Firmicutes	Yes
+Bacillaceae	Firmicutes	Yes
+Exiguobacteraceae	Firmicutes	Yes
+Cellulomonadaceae	Actinobacteria	Yes
+Actinosynnemataceae	Actinobacteria	
+Thermomonosporaceae	Actinobacteria	Yes
+Micromonosporaceae	Actinobacteria	Yes
+Microbacteriaceae	Actinobacteria	Yes
+Unnamed231	Bacteroidetes	
+Unnamed213	Bacteroidetes	
+Unnamed118	Bacteroidetes	
+Unnamed329	Bacteroidetes	
+Unnamed128	Bacteroidetes	
+Unnamed129	Bacteroidetes	
+Unnamed28	Bacteroidetes	
+Weeksellaceae	Bacteroidetes	Yes

@@ -1,0 +1,340 @@
+Supplementary Table 8c: Specific and overlap of indica-enriched OTUs in two fields and nrt1.1b-depleted OTUs.												
+GroupID	Description											
+A	indica enriched in field I											
+B	indica enriched in field II											
+C	nrt1.1b depleted											
+												
+	Relative abundance (%)											
+Total	58.161											
+Indica common	27.678											
+common	23.954											
+												
+OTUID	Mean	Phylum	Class	Order	Family	Genus						
+												
+filedI_indica_Enriched-specific_to_others												
+3												
+OTU_1046	0.014	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_375	0.023	Bacteroidetes	Bacteroidia	Bacteroidales	Marinilabiliaceae	Alistipes						
+OTU_42	0.214	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Fusibacter						
+												
+filedII_indica_Enriched-specific_to_others												
+57												
+OTU_755	0.035	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Dactylosporangium						
+OTU_257	0.032	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae	Sinomonas						
+OTU_427	0.025	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Massilia						
+OTU_899	0.009	Acidobacteria	Acidobacteria_Gp13	Holophagales	Holophagaceae	Gp13						
+OTU_366	0.029	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Actinopolymorpha						
+OTU_482	0.01	Proteobacteria	Deltaproteobacteria	Desulfovibrionales	Thermomicrobiaceae	Thermomicrobium						
+OTU_181	0.047	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Parcubacteria_genera_incertae_sedis						
+OTU_649	0.018	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae	Alkanibacter						
+OTU_578	0.01	Armatimonadetes	Fimbriimonadia	Fimbriimonadales	Fimbriimonadaceae	Armatimonadetes_gp5						
+OTU_248	0.03	Firmicutes	Clostridia	Clostridiales	Clostridiales_Incertae_Sedis_XII	Fusibacter						
+OTU_715	0.079	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Novosphingobium						
+OTU_426	0.011	Chloroflexi	Thermomicrobia	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+OTU_1855	0.007	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_442	0.059	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium						
+OTU_267	0.026	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Asticcacaulis						
+OTU_301	0.036	Proteobacteria	Planctomycetia	Planctomycetales	Planctomycetaceae	Desulfovibrio						
+OTU_226	0.056	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Pseudolabrys						
+OTU_870	0.009	Acidobacteria	Acidobacteria_Gp1	Gp1								
+OTU_1672	0.011	Chloroflexi	Ktedonobacteria	Ktedonobacterales	Thermogemmatisporaceae	Thermogemmatispora						
+OTU_853	0.025	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae	Steroidobacter						
+OTU_1159	0.008	Proteobacteria	Deltaproteobacteria	Syntrophobacterales	Syntrophobacteraceae	Syntrophobacter						
+OTU_341	0.014	Chloroflexi	Thermomicrobia	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+OTU_1278	0.081	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Azonexus						
+OTU_1174	0.01	Verrucomicrobia	Subdivision3	Subdivision3_genera_incertae_sedis	Limisphaera_ngatamarikiensis							
+OTU_173	0.033	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Kaistia						
+OTU_3260	0.01	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_395	0.011	Chloroflexi	Thermomicrobia	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+OTU_84	0.102	Proteobacteria	Deltaproteobacteria	Myxococcales	Nannocystaceae	Chondromyces						
+OTU_5356	0.014	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Dokdonella						
+OTU_174	0.032	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Azospira						
+OTU_88	0.195	Firmicutes	Clostridia	Clostridiales	Clostridiales_Incertae_Sedis_XII	Acidaminobacter						
+OTU_418	0.022	Proteobacteria	Spirochaetia	Spirochaetales	Leptospiraceae	Turneriella						
+OTU_187	0.051	Proteobacteria	Deltaproteobacteria	Clostridiales	Geobacteraceae	Geobacter						
+OTU_2369	0.014	Proteobacteria	Deltaproteobacteria	Syntrophobacterales	Syntrophobacteraceae	Syntrophobacter						
+OTU_352	0.089	Actinobacteria	Actinobacteria	Actinomycetales	Cryptosporangiaceae	Jatrophihabitans						
+OTU_1443	0.006	Firmicutes	Bacilli	Bacillales	Staphylococcaceae	Staphylococcus						
+OTU_477	0.009	Proteobacteria	Deltaproteobacteria	Desulfovibrionales	Desulfovibrionaceae	Thermogemmatispora						
+OTU_331	0.043	Proteobacteria	Alphaproteobacteria	Alphaproteobacteria_incertae_sedis	Rhizomicrobium	Rhizomicrobium_electricum						
+OTU_527	0.011	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingobium						
+OTU_824	0.011	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Streptomyces						
+OTU_479	0.02	Chloroflexi	Chloroflexia	Chloroflexales	Herpetosiphonaceae	Herpetosiphon						
+OTU_131	0.095	Actinobacteria	Actinobacteria	Actinomycetales	Cellulomonadaceae	Actinotalea						
+OTU_354	0.031	Actinobacteria	Actinobacteria	Acidimicrobiales	Acidimicrobineae_incertae_sedis	Aciditerrimonas						
+OTU_584	0.008	Proteobacteria	Thermomicrobia	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+OTU_1378	0.045	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiales_incertae_sedis	Sphaerotilus						
+OTU_198	0.107	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Dactylosporangium						
+OTU_216	0.072	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Bacteroides						
+OTU_315	0.017	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae	Haliangium						
+OTU_701	0.038	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides						
+OTU_234	0.024	Actinobacteria	Actinobacteria	Acidimicrobiales	Acidimicrobineae_incertae_sedis	Aciditerrimonas						
+OTU_1334	0.016	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae	Haliangium						
+OTU_583	0.012	Actinobacteria	Actinobacteria	Actinomycetales	Actinomycetaceae	Actinomyces						
+OTU_319	0.023	Proteobacteria	Deltaproteobacteria	Myxococcales	Phaselicystidaceae	Phaselicystis						
+OTU_869	0.023	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Aquimonas						
+OTU_1729	0.012	Chloroflexi	Ktedonobacteria	Ktedonobacterales	Ktedonobacteraceae	Ktedonobacter						
+OTU_160	0.069	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Erythrobacteraceae	Porphyrobacter						
+OTU_283	0.019	Chloroflexi	Thermomicrobia	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+												
+nrt1.1b_Depleted-specific_to_others												
+57												
+OTU_129	0.144	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Novosphingobium						
+OTU_128	0.077	Proteobacteria	Gammaproteobacteria	Aeromonadales	Aeromonadaceae	Tolumonas						
+OTU_100	0.1	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium						
+OTU_274	0.028	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Ancalomicrobium						
+OTU_105	0.172	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas						
+OTU_104	0.464	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Ciceribacter						
+OTU_185	0.191	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylocystaceae	Pleomorphomonas						
+OTU_262	0.035	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium						
+OTU_2	7.692	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Ralstonia						
+OTU_305	0.024	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Azorhizobium						
+OTU_1023	0.013	Deinococcus-Thermus	Deinococci	Deinococcales	Deinococcaceae	Deinococcus						
+OTU_23	0.478	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Ensifer						
+OTU_22	0.374	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Cystobacter						
+OTU_25	0.421	Firmicutes	Bacilli	Bacillales	Paenibacillaceae_1	Paenibacillus						
+OTU_1138	0.243	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas						
+OTU_40	0.63	Firmicutes	Clostridia	Clostridiales	Clostridiaceae_1	Clostridium_sensu_stricto						
+OTU_82	0.496	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Dechloromonas						
+OTU_28	0.488	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Rhizobium						
+OTU_205	0.073	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium						
+OTU_83	0.181	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Actinoplanes						
+OTU_4346	0.075	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Duganella						
+OTU_298	0.057	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Rhizobium						
+OTU_65	0.217	Bacteroidetes	Bacteroidia	Bacteroidales	Marinilabiliaceae	Natronoflexus						
+OTU_153	0.129	Proteobacteria	Betaproteobacteria	Methylophilales	Methylophilaceae	Methylophilus						
+OTU_60	0.149	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylobacteriaceae	Microvirga						
+OTU_62	0.32	Actinobacteria	Actinobacteria	Actinomycetales	Mycobacteriaceae	Mycobacterium						
+OTU_2568	0.14	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylocystaceae	Methylocystis						
+OTU_214	0.076	Proteobacteria	Gammaproteobacteria	Methylococcales	Methylococcaceae	Methylomonas						
+OTU_211	0.11	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Caulobacter						
+OTU_134	0.049	Proteobacteria	Deltaproteobacteria	Desulfovibrionales	Desulfovibrionaceae	Desulfovibrio						
+OTU_586	0.03	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Azospira						
+OTU_412	0.122	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Polaromonas						
+OTU_569	0.05	Proteobacteria	Betaproteobacteria	Neisseriales	Neisseriaceae	Vogesella						
+OTU_256	0.056	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae	Agromyces						
+OTU_196	0.472	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Herbaspirillum						
+OTU_3395	0.036	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhodospirillaceae	Novispirillum						
+OTU_73	0.226	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Pseudoxanthomonas						
+OTU_31	0.218	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Chloroplast	Streptophyta						
+OTU_18	0.753	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bradyrhizobium						
+OTU_41	0.273	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Uliginosibacterium						
+OTU_35	0.281	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bosea						
+OTU_15	0.644	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylocystaceae	Pleomorphomonas						
+OTU_38	0.416	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas						
+OTU_10	1.659	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Acidovorax						
+OTU_13	0.658	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Hydrogenophaga						
+OTU_58	0.16	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium						
+OTU_96	0.123	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Rhizobium						
+OTU_97	0.181	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Tabrizicola						
+OTU_90	0.28	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Azospira						
+OTU_92	0.067	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Thermodesulfovibrio						
+OTU_50	0.471	Proteobacteria	Betaproteobacteria	Neisseriales	Neisseriaceae	Vogesella						
+OTU_51	0.174	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Dyella						
+OTU_71	0.147	Proteobacteria	Alphaproteobacteria	Rhizobiales	Phyllobacteriaceae	Mesorhizobium						
+OTU_54	0.128	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Tangfeifania						
+OTU_16	0.578	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylocystaceae	Methylosinus						
+OTU_56	0.194	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Propionivibrio						
+OTU_254	0.042	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Rhodovulum						
+												
+filedI_indica_Enriched_filedII_indica_Enriched-specific_to_others												
+71												
+OTU_2397	0.033	Firmicutes	Clostridia	Clostridiales	Clostridiaceae_1	Clostridium_sensu_stricto						
+OTU_109	0.161	Spirochaetes	Spirochaetia	Spirochaetales	Spirochaetaceae	Spirochaeta						
+OTU_201	0.044	Proteobacteria	Actinobacteria	Actinomycetales	Xanthomonadaceae	Streptomyces						
+OTU_321	0.022	Proteobacteria	Deltaproteobacteria	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+OTU_730	0.021	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_484	0.01	Proteobacteria	Deltaproteobacteria	Gemmatimonadales	Gemmatimonadaceae	Gemmatimonas						
+OTU_124	0.049	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Marinifilum						
+OTU_329	0.046	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter						
+OTU_777	0.025	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_121	0.053	Ignavibacteriae	Ignavibacteria	Ignavibacteriales	Ignavibacteriaceae	Melioribacter						
+OTU_220	0.052	Actinobacteria	Actinobacteria	Solirubrobacterales	Gaiellaceae	Gaiella						
+OTU_406	0.024	Ignavibacteriae	Ignavibacteria	Ignavibacteriales	Ignavibacteriaceae	Melioribacter						
+OTU_461	0.031	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Prolixibacter						
+OTU_365	0.029	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Draconibacterium						
+OTU_261	0.022	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Pseudoramibacter						
+OTU_402	0.013	Poribacteria	Actinobacteria	Caldilineales	Caldilineaceae	Poribacteria_genera_incertae_sedis						
+OTU_340	0.022	Proteobacteria	Gammaproteobacteria	Chromatiales	Thioalkalispiraceae	Thioprofundum						
+OTU_246	0.05	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_716	0.029	Firmicutes	Clostridia	Clostridiales	Clostridiaceae_1	Clostridium_sensu_stricto						
+OTU_1148	0.009	Acidobacteria	Acidobacteria_Gp1	Gp1	Acidobacterium_capsulatum							
+OTU_243	0.031	Acidobacteria	Holophagae	Holophagales	Holophagaceae	Geothrix						
+OTU_348	0.012	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae	Clostridium_III						
+OTU_195	0.043	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Sulfuritalea						
+OTU_675	0.022	Acidobacteria	Acidobacteria_Gp1	Gp1	Telmatobacter_bradus							
+OTU_26	0.266	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides						
+OTU_384	0.032	Ignavibacteriae	Ignavibacteria	Ignavibacteriales	Ignavibacteriaceae	Ignavibacterium						
+OTU_142	0.074	Proteobacteria	Alphaproteobacteria	Rhizobiales	Clostridiales_Incertae_Sedis_III	Caldicellulosiruptor						
+OTU_186	0.11	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Tangfeifania						
+OTU_1697	0.012	Verrucomicrobia	Subdivision3	Subdivision3_genera_incertae_sedis								
+OTU_303	0.02	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_113	0.064	Chloroflexi	Thermomicrobia	Thermomicrobiales	Thermomicrobiaceae	Thermomicrobium						
+OTU_837	0.025	Actinobacteria	Actinobacteria	Actinomycetales	Thermomonosporaceae	Actinoallomurus						
+OTU_89	0.08	Bacteroidetes	Bacteroidia	Bacteroidales	Marinilabiliaceae	Mangroviflexus						
+OTU_66	0.115	Proteobacteria	Deltaproteobacteria	Syntrophobacterales	Syntrophaceae	Desulfomonile						
+OTU_529	0.022	Chloroflexi	Deltaproteobacteria	Ardenticatenales	Ardenticatenaceae	Ardenticatena						
+OTU_63	0.13	Spirochaetes	Spirochaetia	Spirochaetales	Spirochaetaceae	Treponema						
+OTU_5629	0.057	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_1517	0.019	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Thermodesulfovibrio						
+OTU_310	0.02	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Thermodesulfovibrio						
+OTU_525	0.061	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_888	0.019	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces						
+OTU_507	0.021	Proteobacteria	Deltaproteobacteria	Desulfovibrionales	Thermomicrobiaceae	Thermomicrobium						
+OTU_528	0.02	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Tangfeifania						
+OTU_219	0.028	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_132	0.044	Bacteroidetes	Bacteroidetes_incertae_sedis	Bacteroidales	Marinilabiliaceae	Marinifilum						
+OTU_145	0.057	Spirochaetes	Spirochaetia	Spirochaetales	Spirochaetaceae	Treponema						
+OTU_356	0.04	Acidobacteria	Acidobacteria_Gp1	Gp1	Acidobacterium_capsulatum							
+OTU_107	0.089	Proteobacteria	Betaproteobacteria	Neisseriales	Neisseriaceae	Leeia						
+OTU_410	0.069	Acidobacteria	Acidobacteria_Gp1	Candidatus_Koribacter								
+OTU_439	0.025	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Tangfeifania						
+OTU_438	0.025	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_374	0.028	Proteobacteria	Betaproteobacteria	Burkholderiales	Rhodocyclaceae	Burkholderia						
+OTU_722	0.008	Acidobacteria	Acidobacteria_Gp1	Gp1	Edaphobacter_modestus							
+OTU_620	0.032	Acidobacteria	Acidobacteria_Gp7	Gp7								
+OTU_544	0.07	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_190	0.056	Spirochaetes	Spirochaetia	Spirochaetales	Spirochaetaceae	Spirochaeta						
+OTU_191	0.059	Acidobacteria	Acidobacteria_Gp1	Gp1								
+OTU_841	0.008	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Desulfuromonas						
+OTU_906	0.102	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_961	0.033	Acidobacteria	Acidobacteria_Gp3	Candidatus_Solibacter								
+OTU_275	0.125	Actinobacteria	Actinobacteria	Actinomycetales	Thermomonosporaceae	Actinomadura						
+OTU_587	0.019	Proteobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Ardenticatena						
+OTU_807	0.01	Proteobacteria	Deltaproteobacteria	Gemmatimonadales	Gemmatimonadaceae	Gemmatimonas						
+OTU_540	0.05	Actinobacteria	Actinobacteria	Solirubrobacterales	Solirubrobacteraceae	Solirubrobacter						
+OTU_164	0.096	Bacteroidetes	Bacteroidia	Bacteroidales	Marinilabiliaceae	Natronoflexus						
+OTU_282	0.02	Firmicutes	Clostridia	Clostridiales	Clostridiaceae_1	Clostridium_sensu_stricto						
+OTU_169	0.051	Proteobacteria	Clostridia	Clostridiales	Ruminococcaceae	Pseudobacteroides						
+OTU_119	0.203	Acidobacteria	Holophagae	Holophagales	Holophagaceae	Geothrix						
+OTU_141	0.066	Proteobacteria	Chloroplast	Rhizobiales	Chloroplast	Streptophyta						
+OTU_861	0.16	Proteobacteria	Betaproteobacteria	Gallionellales	Gallionellaceae	Sideroxydans						
+OTU_57	0.131	Firmicutes	Clostridia	Clostridiales	Veillonellaceae	Rubrobacter						
+												
+filedI_indica_Enriched_nrt1.1b_Depleted-specific_to_others												
+3												
+OTU_127	0.073	Spirochaetes	Spirochaetia	Spirochaetales	Spirochaetaceae	Treponema						
+OTU_122	0.146	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Noviherbaspirillum						
+OTU_133	0.129	Proteobacteria	Deltaproteobacteria	Desulfovibrionales	Desulfovibrionaceae	Desulfovibrio						
+												
+filedII_indica_Enriched_nrt1.1b_Depleted-specific_to_others												
+46												
+OTU_206	0.059	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiales_incertae_sedis	Vasilyevaea						
+OTU_323	0.071	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Tangfeifania						
+OTU_4356	0.169	Actinobacteria	Actinobacteria	Actinomycetales	Thermomonosporaceae	Actinomadura						
+OTU_125	0.085	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia						
+OTU_123	0.085	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Asticcacaulis						
+OTU_264	0.088	Actinobacteria	Actinobacteria	Acidimicrobiales	Acidimicrobiaceae	Ilumatobacter						
+OTU_180	0.128	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Rhizobium						
+OTU_595	0.009	Acidobacteria	Acidobacteria_Gp2	Gp2								
+OTU_224	0.051	Actinobacteria	Actinobacteria	Actinomycetales	Demequinaceae	Demequina						
+OTU_225	0.095	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae	Steroidobacter						
+OTU_21	0.636	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus						
+OTU_872	0.015	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Desulfuromonas						
+OTU_49	0.24	Proteobacteria	Betaproteobacteria	Gallionellales	Gallionellaceae	Gallionella						
+OTU_390	0.044	Ignavibacteriae	Ignavibacteria	Ignavibacteriales	Ignavibacteriaceae	Melioribacter						
+OTU_393	0.027	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Pelobacter						
+OTU_419	0.051	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Cystobacter						
+OTU_85	0.288	Firmicutes	Clostridia	Clostridiales	Clostridiaceae_1	Clostridium_sensu_stricto						
+OTU_111	0.153	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Pseudonocardia						
+OTU_2503	0.059	Firmicutes	Clostridia	Clostridiales	Clostridiales_Incertae_Sedis_XII	Acidaminobacter						
+OTU_67	0.133	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus						
+OTU_293	0.092	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces						
+OTU_139	0.118	Proteobacteria	Gammaproteobacteria	Methylococcales	Methylococcaceae	Methylobacter						
+OTU_335	0.065	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Phenylobacterium						
+OTU_143	0.122	Firmicutes	Clostridia	Clostridiales	Clostridiaceae_1	Clostridium_sensu_stricto						
+OTU_137	0.061	Actinobacteria	Actinobacteria	Actinomycetales	Cellulomonadaceae	Cellulomonas						
+OTU_501	0.062	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus						
+OTU_2811	0.034	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus						
+OTU_370	0.037	Firmicutes	Clostridia	Clostridiales	Peptostreptococcaceae	Romboutsia						
+OTU_197	0.095	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides						
+OTU_231	0.055	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_1161	0.266	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus						
+OTU_297	0.163	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bradyrhizobium						
+OTU_235	0.098	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides						
+OTU_32	0.311	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces						
+OTU_146	0.094	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Marmoricola						
+OTU_36	0.517	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiales_incertae_sedis	Tepidimonas						
+OTU_34	0.482	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Micromonospora						
+OTU_2317	0.053	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides						
+OTU_140	0.062	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Acidovorax						
+OTU_289	0.048	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces						
+OTU_166	0.051	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia						
+OTU_385	0.067	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Intrasporangium						
+OTU_93	0.185	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides						
+OTU_168	0.034	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae	Mycetocola						
+OTU_99	0.081	Actinobacteria	Actinobacteria	Acidimicrobiales	Acidimicrobiaceae	Ilumatobacter						
+OTU_284	0.099	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Actinoplanes						
+												
+filedI_indica_Enriched_filedII_indica_Enriched_nrt1.1b_Depleted-specific_to_others												
+70												
+OTU_202	0.06	Actinobacteria	Actinobacteria	Actinomycetales	Propionibacteriaceae	Acidothermus						
+OTU_108	0.158	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_496	0.099	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Mobilitalea						
+OTU_512	0.059	Actinobacteria	Actinobacteria	Coriobacteriales	Coriobacteriaceae	Olsenella						
+OTU_679	0.041	Actinobacteria	Actinobacteria	Coriobacteriales	Coriobacteriaceae	Atopobium						
+OTU_102	0.153	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Dissulfuribacter						
+OTU_106	0.085	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Pseudolabrys						
+OTU_926	0.069	Firmicutes	Bacilli	Bacillales	Bacillaceae_1	Bacillus						
+OTU_637	0.032	Proteobacteria	Deltaproteobacteria	Myxococcales	Labilitrichaceae	Labilithrix						
+OTU_8	2.63	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter						
+OTU_182	0.091	Actinobacteria	Actinobacteria	Solirubrobacterales	Solirubrobacteraceae	Solirubrobacter						
+OTU_628	0.141	Proteobacteria	Betaproteobacteria	Neisseriales	Neisseriaceae	Chromobacterium						
+OTU_575	0.024	Actinobacteria	Actinobacteria	Coriobacteriales	Coriobacteriaceae	Solirubrobacter						
+OTU_440	0.061	Actinobacteria	Actinobacteria	Coriobacteriales	Coriobacteriaceae	Streptomyces						
+OTU_221	0.032	Bacteroidetes	Bacteroidia	Bacteroidales	Marinilabiliaceae	Mangroviflexus						
+OTU_612	0.034	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_7	3.284	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Curvibacter						
+OTU_712	0.026	Verrucomicrobia	Subdivision3	Subdivision3_genera_incertae_sedis								
+OTU_47	0.208	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter						
+OTU_1894	0.028	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_45	0.21	Spirochaetes	Spirochaetia	Spirochaetales	Leptospiraceae	Leptonema						
+OTU_791	0.026	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_29	1.053	Actinobacteria	Actinobacteria	Actinomycetales	Kineosporiaceae	Mobilicoccus						
+OTU_172	0.082	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiales_incertae_sedis	Thiomonas						
+OTU_48	0.274	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Pelobacter						
+OTU_116	0.108	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingomonas						
+OTU_117	0.121	Proteobacteria	Alphaproteobacteria	Rhizobiales	Phyllobacteriaceae	Mesorhizobium						
+OTU_114	0.163	Proteobacteria	Betaproteobacteria	Burkholderiales	Neisseriaceae	Pseudogulbenkiania						
+OTU_80	0.177	Bacteroidetes	Bacteroidia	Bacteroidales	Prolixibacteraceae	Tangfeifania						
+OTU_112	0.225	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_68	0.273	Bacteroidetes	Bacteroidia	Bacteroidales	Marinilabiliaceae	Mangroviflexus						
+OTU_396	0.057	Proteobacteria	Deltaproteobacteria	Bacillales	Desulfuromonadaceae	Gemmatimonas						
+OTU_669	0.051	Actinobacteria	Actinobacteria	Solirubrobacterales	Conexibacteraceae	Conexibacter						
+OTU_178	0.075	Chloroflexi	Caldilineae	Caldilineales	Caldilineaceae	Caldilinea						
+OTU_179	0.1	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhodobiaceae	Methyloligella						
+OTU_61	0.135	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter						
+OTU_288	0.052	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Nitrospira						
+OTU_118	0.12	Proteobacteria	Deltaproteobacteria	Desulfobacterales	Desulfobulbaceae	Desulfocapsa						
+OTU_155	0.044	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_506	0.028	Proteobacteria	Betaproteobacteria	Burkholderiales	Sulfuricellaceae	Sulfuriferula						
+OTU_138	0.247	Proteobacteria	Betaproteobacteria	Gallionellales	Gallionellaceae	Sideroxydans						
+OTU_210	0.115	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Lapillicoccus						
+OTU_20	0.295	Proteobacteria	Gammaproteobacteria	Clostridiales	Chloroplast	Streptophyta						
+OTU_115	0.177	Actinobacteria	Actinobacteria	Coriobacteriales	Coriobacteriaceae	Gordonibacter						
+OTU_136	0.115	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Pseudolabrys						
+OTU_494	0.038	Proteobacteria	Alphaproteobacteria	Rhizobiales	Beijerinckiaceae	Chelatococcus						
+OTU_81	0.415	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Sulfuritalea						
+OTU_350	0.12	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter						
+OTU_378	0.081	Actinobacteria	Actinobacteria	Actinomycetales	Geodermatophilaceae	Blastococcus						
+OTU_199	0.056	Firmicutes	Bacilli	Bacillales	Paenibacillaceae_2	Ammoniphilus						
+OTU_233	0.052	Actinobacteria	Actinobacteria	Gaiellales	Gaiellaceae	Gaiella						
+OTU_230	0.059	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia						
+OTU_236	0.1	Actinobacteria	Actinobacteria	Actinomycetales	Mycobacteriaceae	Mycobacterium						
+OTU_316	0.067	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter						
+OTU_19	2.079	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Kinneretia						
+OTU_2378	0.017	Verrucomicrobia	Subdivision3	Subdivision3_genera_incertae_sedis								
+OTU_30	0.625	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Georgfuchsia						
+OTU_392	0.031	Acidobacteria	Acidobacteria_Gp3	Candidatus_Solibacter								
+OTU_37	0.242	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Desulfuromonadaceae	Geobacter						
+OTU_800	0.023	Proteobacteria	Betaproteobacteria	Burkholderiales	Sulfuricellaceae	Sulfuriferula						
+OTU_4306	0.028	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiales_incertae_sedis	Thiomonas						
+OTU_39	1.116	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiales_incertae_sedis	Piscinibacter						
+OTU_11	3.895	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter						
+OTU_1954	0.643	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacteraceae	Anaeromyxobacter						
+OTU_161	0.097	Actinobacteria	Actinobacteria	Solirubrobacterales	Conexibacteraceae	Conexibacter						
+OTU_9	2.225	Proteobacteria	Betaproteobacteria	Gallionellales	Gallionellaceae	Sideroxydans						
+OTU_386	0.102	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter						
+OTU_144	0.086	Proteobacteria	Deltaproteobacteria	Desulfovibrionales	Desulfovibrionaceae	Desulfovibrio						
+OTU_3464	0.071	Spirochaetes	Spirochaetia	Spirochaetales	Spirochaetaceae	Spirochaeta						
+OTU_786	0.048	Proteobacteria	Deltaproteobacteria	Syntrophobacterales	Syntrophaceae	Dissulfuribacter						
