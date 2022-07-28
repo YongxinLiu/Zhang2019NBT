@@ -9,6 +9,6 @@ Scripts for statistics and plotting figures in "NRT1.1B is associated with root 
 - script/ # General R scripts used in this study
 
 
-If you used these scripts, please cited the paper below:
+If you use these scripts, please cite the paper below:
 
 Jingying Zhang#, Yong-Xin Liu#, Na Zhang#, Bin Hu#, Tao Jin#, ..., Chengcai Chu*, Yang Bai*. NRT1.1B is associated with root microbiota composition and nitrogen use in field-grown rice. 2019. Nature Biotechnology.
